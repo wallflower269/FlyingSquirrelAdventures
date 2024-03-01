@@ -1,0 +1,346 @@
+@startuml
+class Entity.Animation {
+- BufferedImage[] frames
+- int currentFrame
+- long startTime
+- long delay
+- boolean playedOnce
++ void setFrames(BufferedImage[])
++ void setDelay(long)
++ void setFrame(int)
++ void update()
++ int getFrame()
++ BufferedImage getImage()
++ boolean hasPlayedOnce()
+}
+
+
+class Entity.Explosion {
+- int x
+- int y
+- int xmap
+- int ymap
+- int width
+- int height
+- Animation animation
+- BufferedImage[] sprites
+- boolean remove
++ void update()
++ boolean shouldRemove()
++ void setMapPosition(int,int)
++ void draw(Graphics2D)
+}
+
+
+class TileMap.TileMap {
+- double x
+- double y
+- int xmin
+- int ymin
+- int xmax
+- int ymax
+- double tween
+- int[][] map
+- int tileSize
+- int numRows
+- int numCols
+- int width
+- int height
+- BufferedImage tileset
+- int numTilesAcross
+- Tile[][] tiles
+- int rowOffset
+- int colOffset
+- int numRowsToDraw
+- int numColsToDraw
++ void loadTiles(String)
++ void loadMap(String)
++ int getTileSize()
++ double getx()
++ double gety()
++ int getWidth()
++ int getHeight()
++ int getType(int,int)
++ void setTween(double)
++ void setPosition(double,double)
+- void fixBounds()
++ void draw(Graphics2D)
+}
+
+
+class TileMap.Tile {
+- BufferedImage image
+- int type
++ {static} int NORMAL
++ {static} int BLOCKED
++ BufferedImage getImage()
++ int getType()
+}
+
+
+abstract class Entity.MapObject {
+# TileMap tileMap
+# int tileSize
+# double xmap
+# double ymap
+# double x
+# double y
+# double dx
+# double dy
+# int width
+# int height
+# int cwidth
+# int cheight
+# int currRow
+# int currCol
+# double xdest
+# double ydest
+# double xtemp
+# double ytemp
+# boolean topLeft
+# boolean topRight
+# boolean bottomLeft
+# boolean bottomRight
+# Animation animation
+# int currentAction
+# int previousAction
+# boolean facingRight
+# boolean left
+# boolean right
+# boolean up
+# boolean down
+# boolean jumping
+# boolean falling
+# double moveSpeed
+# double maxSpeed
+# double stopSpeed
+# double fallSpeed
+# double maxFallSpeed
+# double jumpStart
+# double stopJumpSpeed
++ boolean intersects(MapObject)
++ Rectangle getRectangle()
++ void calculateCorners(double,double)
++ void checkTileMapCollision()
++ int getx()
++ int gety()
++ int getWidth()
++ int getHeight()
++ int getCWidth()
++ int getCHeight()
++ void setPosition(double,double)
++ void setVector(double,double)
++ void setMapPosition()
++ void setLeft(boolean)
++ void setRight(boolean)
++ void setUp(boolean)
++ void setDown(boolean)
++ void setJumping(boolean)
++ boolean notOnScreen()
++ void draw(java.awt.Graphics2D)
+}
+
+
+class Entity.Enemy {
+# int health
+# int maxHealth
+# boolean dead
+# int damage
+# boolean flinching
+# long flinchTimer
++ boolean isDead()
++ int getDamage()
++ void hit(int)
++ void update()
+}
+
+
+class Main.Game {
++ {static} void main(String[])
+}
+
+class Main.GamePanel {
++ {static} int WIDTH
++ {static} int HEIGHT
++ {static} int SCALE
+- Thread thread
+- boolean running
+- int FPS
+- long targetTime
+- BufferedImage image
+- Graphics2D g
+- GameStateManager gsm
++ void addNotify()
+- void init()
++ void run()
+- void update()
+- void draw()
+- void drawToScreen()
++ void keyTyped(KeyEvent)
++ void keyPressed(KeyEvent)
++ void keyReleased(KeyEvent)
+}
+
+
+class GameState.GameStateManager {
+- GameState[] gameStates
+- int currentState
++ {static} int NUMGAMESTATES
++ {static} int MENUSTATE
++ {static} int LEVEL1STATE
+- void loadState(int)
+- void unloadState(int)
++ void setState(int)
++ void update()
++ void draw(java.awt.Graphics2D)
++ void keyPressed(int)
++ void keyReleased(int)
+}
+
+
+class TileMap.Background {
+- BufferedImage image
+- double x
+- double y
+- double dx
+- double dy
+- double moveScale
++ void setPosition(double,double)
++ void setVector(double,double)
++ void update()
++ void draw(Graphics2D)
+}
+
+
+class GameState.Level1State {
+- TileMap tileMap
+- Background bg
+- Player player
+- ArrayList<Enemy> enemies
+- ArrayList<Explosion> explosions
+- HUD hud
+- AudioPlayer bgMusic
++ void init()
+- void populateEnemies()
++ void update()
++ void draw(Graphics2D)
++ void keyPressed(int)
++ void keyReleased(int)
+}
+
+
+abstract class GameState.GameState {
+# GameStateManager gsm
++ {abstract}void init()
++ {abstract}void update()
++ {abstract}void draw(java.awt.Graphics2D)
++ {abstract}void keyPressed(int)
++ {abstract}void keyReleased(int)
+}
+
+
+class Entity.Enemies.Slugger {
+- BufferedImage[] sprites
+- void getNextPosition()
++ void update()
++ void draw(Graphics2D)
+}
+
+
+class Entity.HUD {
+- Player player
+- BufferedImage image
+- Font font
++ void draw(Graphics2D)
+}
+
+
+class Entity.Player {
+- int health
+- int maxHealth
+- int fire
+- int maxFire
+- boolean dead
+- boolean flinching
+- long flinchTimer
+- boolean firing
+- int fireCost
+- int fireBallDamage
+- ArrayList<FireBall> fireBalls
+- boolean scratching
+- int scratchDamage
+- int scratchRange
+- boolean gliding
+- ArrayList<BufferedImage[]> sprites
+- int[] numFrames
+- {static} int IDLE
+- {static} int WALKING
+- {static} int JUMPING
+- {static} int FALLING
+- {static} int GLIDING
+- {static} int FIREBALL
+- {static} int SCRATCHING
+- HashMap<String,AudioPlayer> sfx
++ int getHealth()
++ int getMaxHealth()
++ int getFire()
++ int getMaxFire()
++ void setFiring()
++ void setScratching()
++ void setGliding(boolean)
++ void checkAttack(ArrayList<Enemy>)
++ void hit(int)
+- void getNextPosition()
++ void update()
++ void draw(Graphics2D)
+}
+
+
+class Audio.AudioPlayer {
+- Clip clip
++ void play()
++ void stop()
++ void close()
+}
+
+
+class GameState.MenuState {
+- Background bg
+- int currentChoice
+- String[] options
+- Color titleColor
+- Font titleFont
+- Font font
++ void init()
++ void update()
++ void draw(Graphics2D)
+- void select()
++ void keyPressed(int)
++ void keyReleased(int)
+}
+
+
+class Entity.FireBall {
+- boolean hit
+- boolean remove
+- BufferedImage[] sprites
+- BufferedImage[] hitSprites
++ void setHit()
++ boolean shouldRemove()
++ void update()
++ void draw(Graphics2D)
+}
+
+
+
+
+Entity.MapObject <|-- Entity.Enemy
+Main.Runnable <|.. Main.GamePanel
+Main.KeyListener <|.. Main.GamePanel
+javax.swing.JPanel <|-- Main.GamePanel
+GameState.GameState <|-- GameState.Level1State
+Entity.Enemies.Enemy <|-- Entity.Enemies.Slugger
+Entity.MapObject <|-- Entity.Player
+GameState.GameState <|-- GameState.MenuState
+Entity.MapObject <|-- Entity.FireBall
+@enduml
