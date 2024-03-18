@@ -1,10 +1,12 @@
 package Entity;
 
+import GameState.MenuState;
 import TileMap.*;
 import Audio.AudioPlayer;
 
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
@@ -37,28 +39,35 @@ public class Player extends MapObject {
 	// animations
 	private ArrayList<BufferedImage[]> sprites;
 	private final int[] numFrames = {
-		2, 8, 1, 2, 4, 2, 5
+			1, 8, 5, 3, 3, 5, 3, 8, 2, 1, 3
 	};
 	
 	// animation actions
 	private static final int IDLE = 0;
 	private static final int WALKING = 1;
-	private static final int JUMPING = 2;
+
+	private static final int SCRATCHING = 2;
+	private static final int JUMPING = 3;
 	private static final int FALLING = 3;
 	private static final int GLIDING = 4;
-	private static final int FIREBALL = 5;
-	private static final int SCRATCHING = 6;
-	
+
+	private static final int FLYING = 6;
+
+	private static final int DASHING = 7;
+	private static final int FIREBALL = 9;
+	private static final int DEAD = 10;
+
+	private static final int TELEPORTING = 11;
 	private HashMap<String, AudioPlayer> sfx;
 	
 	public Player(TileMap tm) {
 		
 		super(tm);
 		
-		width = 30;
-		height = 30;
+		width = 40;
+		height = 40;
 		cwidth = 20;
-		cheight = 20;
+		cheight = 28;
 		
 		moveSpeed = 0.3;
 		maxSpeed = 1.6;
@@ -90,7 +99,7 @@ public class Player extends MapObject {
 			);
 			
 			sprites = new ArrayList<BufferedImage[]>();
-			for(int i = 0; i < 7; i++) {
+			for(int i = 0; i < 11; i++) {
 				
 				BufferedImage[] bi =
 					new BufferedImage[numFrames[i]];
@@ -150,7 +159,7 @@ public class Player extends MapObject {
 	public void setGliding(boolean b) { 
 		gliding = b;
 	}
-	
+
 	public void checkAttack(ArrayList<Enemy> enemies) {
 		
 		// loop through enemies
@@ -199,7 +208,8 @@ public class Player extends MapObject {
 		}
 		
 	}
-	
+
+
 	public void hit(int damage) {
 		if(flinching) return;
 		health -= damage;
@@ -282,6 +292,10 @@ public class Player extends MapObject {
 		if(currentAction == FIREBALL) {
 			if(animation.hasPlayedOnce()) firing = false;
 		}
+
+		if(currentAction == DEAD) {
+			if(animation.hasPlayedOnce()) dead = false;
+		}
 		
 		// fireball attack
 		fire += 1;
@@ -320,7 +334,7 @@ public class Player extends MapObject {
 				currentAction = SCRATCHING;
 				animation.setFrames(sprites.get(SCRATCHING));
 				animation.setDelay(50);
-				width = 60;
+				width = 80;
 			}
 		}
 		else if(firing) {
@@ -328,7 +342,7 @@ public class Player extends MapObject {
 				currentAction = FIREBALL;
 				animation.setFrames(sprites.get(FIREBALL));
 				animation.setDelay(100);
-				width = 30;
+				width = 40;
 			}
 		}
 		else if(dy > 0) {
@@ -337,14 +351,14 @@ public class Player extends MapObject {
 					currentAction = GLIDING;
 					animation.setFrames(sprites.get(GLIDING));
 					animation.setDelay(100);
-					width = 30;
+					width = 40;
 				}
 			}
 			else if(currentAction != FALLING) {
 				currentAction = FALLING;
 				animation.setFrames(sprites.get(FALLING));
 				animation.setDelay(100);
-				width = 30;
+				width = 40;
 			}
 		}
 		else if(dy < 0) {
@@ -352,7 +366,7 @@ public class Player extends MapObject {
 				currentAction = JUMPING;
 				animation.setFrames(sprites.get(JUMPING));
 				animation.setDelay(-1);
-				width = 30;
+				width = 40;
 			}
 		}
 		else if(left || right) {
@@ -360,7 +374,15 @@ public class Player extends MapObject {
 				currentAction = WALKING;
 				animation.setFrames(sprites.get(WALKING));
 				animation.setDelay(40);
-				width = 30;
+				width = 40;
+			}
+		}
+		else if(dead) {
+			if(currentAction != DEAD) {
+				currentAction = DEAD;
+				animation.setFrames(sprites.get(DEAD));
+				animation.setDelay(-1);
+				width = 40;
 			}
 		}
 		else {
@@ -368,7 +390,7 @@ public class Player extends MapObject {
 				currentAction = IDLE;
 				animation.setFrames(sprites.get(IDLE));
 				animation.setDelay(400);
-				width = 30;
+				width = 40;
 			}
 		}
 		
@@ -403,6 +425,8 @@ public class Player extends MapObject {
 		super.draw(g);
 		
 	}
+
+
 	
 }
 
