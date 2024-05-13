@@ -1,5 +1,7 @@
 package Entity;
 
+import GameState.ControlCenter;
+import GameState.GameStateManager;
 import GameState.MenuState;
 import TileMap.*;
 import Audio.AudioPlayer;
@@ -11,7 +13,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
-public class Player extends MapObject {
+public abstract class Player extends MapObject {
+	private GameStateManager gsm;
 	
 	// player stuff
 	private int health;
@@ -60,10 +63,11 @@ public class Player extends MapObject {
 	private static final int TELEPORTING = 11;
 	private HashMap<String, AudioPlayer> sfx;
 	
-	public Player(TileMap tm) {
-		
-		super(tm);
-		
+	public Player(TileMap tm , GameStateManager gsm) {
+        super(tm);
+
+        this.gsm = gsm;
+
 		width = 40;
 		height = 40;
 		cwidth = 20;
@@ -211,10 +215,17 @@ public class Player extends MapObject {
 
 
 	public void hit(int damage) {
-		if(flinching) return;
+		//if(flinching) return;
+		//health -= damage;
+		if (flinching) return;
 		health -= damage;
-		if(health < 0) health = 0;
-		if(health == 0) dead = true;
+		System.out.println("Damaged: " + damage + ", New Health: " + health);
+
+		if(health <= 0) {
+			health = 0;
+
+			dead = true;
+		}
 		flinching = true;
 		flinchTimer = System.nanoTime();
 	}
@@ -271,7 +282,6 @@ public class Player extends MapObject {
 			
 			if(dy > 0) jumping = false;
 			if(dy < 0 && !jumping) dy += stopJumpSpeed;
-			
 			if(dy > maxFallSpeed) dy = maxFallSpeed;
 			
 		}
@@ -284,6 +294,16 @@ public class Player extends MapObject {
 		getNextPosition();
 		checkTileMapCollision();
 		setPosition(xtemp, ytemp);
+
+
+		if (y > 200) {
+			dead = true;
+		}
+
+		if (dead) {
+			System.out.println("Player is dead, changing to Game Over State."); // Xác nhận chuyển trạng thái
+			gsm.setState(GameStateManager.GAMEOVERSTATE);
+		}
 		
 		// check attack has stopped
 		if(currentAction == SCRATCHING) {
@@ -303,7 +323,12 @@ public class Player extends MapObject {
 		if(firing && currentAction != FIREBALL) {
 			if(fire > fireCost) {
 				fire -= fireCost;
-				FireBall fb = new FireBall(tileMap, facingRight);
+				FireBall fb = new FireBall(tileMap, facingRight) {
+					@Override
+					public boolean dead() {
+						return false;
+					}
+				};
 				fb.setPosition(x, y);
 				fireBalls.add(fb);
 			}

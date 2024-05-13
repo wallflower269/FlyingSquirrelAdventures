@@ -15,7 +15,12 @@ public class Enemy extends MapObject {
 	public Enemy(TileMap tm) {
 		super(tm);
 	}
-	
+
+	@Override
+	public boolean dead() {
+		return false;
+	}
+
 	public boolean isDead() { return dead; }
 	
 	public int getDamage() { return damage; }

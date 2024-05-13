@@ -217,7 +217,8 @@ public abstract class MapObject {
 			);
 		}
 	}
-	
+
+    public abstract boolean dead();
 }
 
 

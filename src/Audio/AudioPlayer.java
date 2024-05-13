@@ -12,9 +12,7 @@ public class AudioPlayer {
 			
 			AudioInputStream ais =
 				AudioSystem.getAudioInputStream(
-					getClass().getResourceAsStream(
-						s
-					)
+					getClass().getResourceAsStream(s)
 				);
 			AudioFormat baseFormat = ais.getFormat();
 			AudioFormat decodeFormat = new AudioFormat(

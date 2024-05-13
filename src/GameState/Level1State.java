@@ -38,8 +38,13 @@ public class Level1State extends GameState {
 		tileMap.setTween(1);
 		
 		bg = new Background("/Backgrounds/grassbg1.gif", 0.1);
-		
-		player = new Player(tileMap);
+
+		player = new Player(tileMap , gsm) {
+			@Override
+			public boolean dead() {
+				return false;
+			}
+		};
 		player.setPosition(100, 100);
 		
 		populateEnemies();
@@ -51,6 +56,11 @@ public class Level1State extends GameState {
 		bgMusic = new AudioPlayer("/Music/level1-1.mp3");
 		bgMusic.play();
 		
+	}
+	private void checkPlayerStatus() {
+		if (player.dead() == true) {  // Giả sử isDead() kiểm tra nếu trạng thái dead là true
+			gsm.setState(GameStateManager.GAMEOVERSTATE);
+		}
 	}
 	
 	private void populateEnemies() {
@@ -74,20 +84,22 @@ public class Level1State extends GameState {
 	}
 	
 	public void update() {
-		
+
 		// update player
 		player.update();
+
 		tileMap.setPosition(
 			GamePanel.WIDTH / 2 - player.getx(),
 			GamePanel.HEIGHT / 2 - player.gety()
 		);
-		
+
 		// set background
 		bg.setPosition(tileMap.getx(), tileMap.gety());
-		
+
 		// attack enemies
 		player.checkAttack(enemies);
-		
+		checkPlayerStatus();
+
 		// update all enemies
 		for(int i = 0; i < enemies.size(); i++) {
 			Enemy e = enemies.get(i);
@@ -99,7 +111,7 @@ public class Level1State extends GameState {
 					new Explosion(e.getx(), e.gety()));
 			}
 		}
-		
+
 		// update explosions
 		for(int i = 0; i < explosions.size(); i++) {
 			explosions.get(i).update();
@@ -108,7 +120,11 @@ public class Level1State extends GameState {
 				i--;
 			}
 		}
-		
+		if (player.getHealth() <= 0) {
+			gsm.setState(GameStateManager.GAMEOVERSTATE);
+
+		}
+
 	}
 	
 	public void draw(Graphics2D g) {
