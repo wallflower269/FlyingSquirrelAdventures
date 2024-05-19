@@ -1,5 +1,6 @@
 package GameState;
 
+import Main.Game;
 import Main.GamePanel;
 import TileMap.*;
 import Entity.*;
@@ -60,6 +61,7 @@ public class Level1State extends GameState {
 	private void checkPlayerStatus() {
 		if (player.dead() == true) {  // Giả sử isDead() kiểm tra nếu trạng thái dead là true
 			gsm.setState(GameStateManager.GAMEOVERSTATE);
+			Game.stopMusic();
 		}
 	}
 	

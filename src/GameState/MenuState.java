@@ -1,5 +1,6 @@
 package GameState;
 
+import Main.Game;
 import TileMap.Background;
 
 import java.awt.*;
@@ -45,7 +46,10 @@ public class MenuState extends GameState {
 		
 	}
 	
-	public void init() {}
+	public void init() {
+		Game.playMusic();
+
+	}
 	
 	public void update() {
 		bg.update();

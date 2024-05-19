@@ -1,5 +1,7 @@
 package GameState;
 
+import Main.Game;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -21,6 +23,7 @@ public class GameOverState extends GameState {
 
     @Override
     public void init() {
+        Game.stopMusic();
 
         try {
             // Đường dẫn tới hình nền, thay đổi nếu chạy từ môi trường khác nhau có thể cần chỉnh sửa
@@ -60,6 +63,7 @@ public class GameOverState extends GameState {
         if (k == KeyEvent.VK_ENTER) {
 
             gsm.setState(GameStateManager.MENUSTATE);
+            Game.playMusic();
         }
     }
 

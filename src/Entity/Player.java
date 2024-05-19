@@ -294,10 +294,12 @@ public abstract class Player extends MapObject {
 		getNextPosition();
 		checkTileMapCollision();
 		setPosition(xtemp, ytemp);
+		//System.out.println("Player Y Position: "  +x) ;
 
 
 		if (y > 200) {
 			dead = true;
+
 		}
 
 		if (dead) {
