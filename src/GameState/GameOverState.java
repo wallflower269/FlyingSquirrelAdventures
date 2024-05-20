@@ -27,7 +27,8 @@ public class GameOverState extends GameState {
 
         try {
             // Đường dẫn tới hình nền, thay đổi nếu chạy từ môi trường khác nhau có thể cần chỉnh sửa
-            background = ImageIO.read(new File("D:/Users/ttnhu/Desktop/PDM/FlyingSquirrelAdventures/bin/Backgrounds/menubg.gif"));
+            background = ImageIO.read(
+                    getClass().getResourceAsStream("/Backgrounds/menubg.gif"));
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error loading background image.");
