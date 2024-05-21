@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
-public class FireBall extends MapObject {
+public abstract class FireBall extends MapObject {
 	
 	private boolean hit;
 	private boolean remove;

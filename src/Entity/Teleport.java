@@ -28,7 +28,7 @@ public class Teleport extends MapObject {
         // Load sprites
         try {
             sprites = loadGIF(new File(
-                    "D:\\mey\\OOP\\FlyingSquirrelAdventures\\Resources\\Sprites\\tele.gif"));
+                "D:\\mey\\FlyingSquirrelAdventures_test\\Resources\\Sprites\\tele.gif"));
 
             animation = new Animation();
             animation.setFrames(sprites.toArray(new BufferedImage[0]));
@@ -51,10 +51,10 @@ public class Teleport extends MapObject {
 
     public Rectangle getRectangle() {
         return new Rectangle(
-                (int)(x - cwidth / 2),
-                (int)(y - cheight / 2),
-                cwidth,
-                cheight
+            (int)(x - cwidth / 2),
+            (int)(y - cheight / 2),
+            cwidth,
+            cheight
         );
     }
 

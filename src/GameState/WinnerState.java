@@ -1,5 +1,7 @@
 package GameState;
 
+import Main.Game;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -21,10 +23,12 @@ public class WinnerState extends GameState {
 
     @Override
     public void init() {
+        Game.stopMusic();
 
         try {
             // Đường dẫn tới hình nền, thay đổi nếu chạy từ môi trường khác nhau có thể cần chỉnh sửa
-            background = ImageIO.read(new File("D:\\mey\\OOP\\FlyingSquirrelAdventures\\Resources\\Backgrounds\\grassbg1.gif"));
+            background = ImageIO.read(
+                    getClass().getResourceAsStream("/Backgrounds/menubg.gif"));
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error loading background image.");
@@ -51,7 +55,7 @@ public class WinnerState extends GameState {
         // Đặt màu và font cho chữ "Game Over"
         g.setColor(Color.BLACK);
         g.setFont(new Font("Arial", Font.BOLD, 28));
-        g.drawString("WWIN", 90, 120); // Căn giữa màn hình
+        g.drawString("Winner", 90, 120); // Căn giữa màn hình
     }
 
 
@@ -60,6 +64,7 @@ public class WinnerState extends GameState {
         if (k == KeyEvent.VK_ENTER) {
 
             gsm.setState(GameStateManager.MENUSTATE);
+            Game.playMusic();
         }
     }
 

@@ -1,5 +1,6 @@
 package GameState;
 
+import Main.Game;
 import TileMap.Background;
 
 import java.awt.*;
@@ -27,10 +28,10 @@ public class MenuState extends GameState {
 		
 		try {
 			
-			bg = new Background("/Backgrounds/menubg.gif", 1);
+			bg = new Background("/Backgrounds/Background_could.png", 1);
 			bg.setVector(-0.1, 0);
 			
-			titleColor = new Color(128, 0, 0);
+			titleColor = new Color(153, 30, 162);
 			titleFont = new Font(
 					"Century Gothic",
 					Font.PLAIN,
@@ -45,7 +46,10 @@ public class MenuState extends GameState {
 		
 	}
 	
-	public void init() {}
+	public void init() {
+		Game.playMusic();
+
+	}
 	
 	public void update() {
 		bg.update();
@@ -59,7 +63,7 @@ public class MenuState extends GameState {
 		// draw title
 		g.setColor(titleColor);
 		g.setFont(titleFont);
-		g.drawString("Dragon Tale", 80, 70);
+		g.drawString("Flying Squirrel", 80, 70);
 		
 		// draw menu options
 		g.setFont(font);

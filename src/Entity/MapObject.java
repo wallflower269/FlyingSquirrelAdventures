@@ -62,6 +62,9 @@ public abstract class MapObject {
 	protected double maxFallSpeed;
 	protected double jumpStart;
 	protected double stopJumpSpeed;
+
+	protected boolean dead;
+
 	
 	// constructor
 	public MapObject(TileMap tm) {
@@ -169,6 +172,18 @@ public abstract class MapObject {
 	public int getHeight() { return height; }
 	public int getCWidth() { return cwidth; }
 	public int getCHeight() { return cheight; }
+
+
+	// thêm
+	public boolean isDead() {
+		return dead;
+	}
+
+	public void setDead(boolean dead) {
+		this.dead = dead;
+	}
+	
+	//
 	
 	public void setPosition(double x, double y) {
 		this.x = x;
@@ -217,7 +232,8 @@ public abstract class MapObject {
 			);
 		}
 	}
-	
+
+    // public abstract boolean dead();
 }
 
 
