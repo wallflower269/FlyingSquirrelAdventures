@@ -84,50 +84,53 @@ public class Level1State extends GameState {
 		}
 		
 	}
-	
-	public void update() {
 
-		// update player
+	public void update() {
+		// Update player
 		player.update();
 
+		// Set tilemap position
 		tileMap.setPosition(
-			GamePanel.WIDTH / 2 - player.getx(),
-			GamePanel.HEIGHT / 2 - player.gety()
+				GamePanel.WIDTH / 2 - player.getx(),
+				GamePanel.HEIGHT / 2 - player.gety()
 		);
 
-		// set background
+		// Set background position
 		bg.setPosition(tileMap.getx(), tileMap.gety());
 
-		// attack enemies
+		// Attack enemies
 		player.checkAttack(enemies);
+
+		// Check player status (e.g., health, dead)
 		checkPlayerStatus();
 
-		// update all enemies
-		for(int i = 0; i < enemies.size(); i++) {
+		// Check if player has reached the end of the level
+		checkForWin();
+
+		// Update all enemies
+		for (int i = 0; i < enemies.size(); i++) {
 			Enemy e = enemies.get(i);
 			e.update();
-			if(e.isDead()) {
+			if (e.isDead()) {
 				enemies.remove(i);
 				i--;
-				explosions.add(
-					new Explosion(e.getx(), e.gety()));
+				explosions.add(new Explosion(e.getx(), e.gety()));
 			}
 		}
 
-		// update explosions
-		for(int i = 0; i < explosions.size(); i++) {
+		// Update explosions
+		for (int i = 0; i < explosions.size(); i++) {
 			explosions.get(i).update();
-			if(explosions.get(i).shouldRemove()) {
+			if (explosions.get(i).shouldRemove()) {
 				explosions.remove(i);
 				i--;
 			}
-		}
-		if (player.getHealth() <= 0) {
-			gsm.setState(GameStateManager.GAMEOVERSTATE);
 
 		}
-
+		//Thuc Minh: For level 2
+		checkForWin();
 	}
+
 	
 	public void draw(Graphics2D g) {
 		
@@ -176,7 +179,17 @@ public class Level1State extends GameState {
 		if(k == KeyEvent.VK_W) player.setJumping(false);
 		if(k == KeyEvent.VK_E) player.setGliding(false);
 	}
-	
+
+	//Thuc Minh: Try to add level 2
+	private void checkForWin() {
+		// Assuming the end of the level is at x = 2000 (for example)
+		if (player.getx() >= 3105) {
+			// Transition to the next level
+			gsm.setState(GameStateManager.LEVEL2STATE);
+		}
+	}
+
+
 }
 
 

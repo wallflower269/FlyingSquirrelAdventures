@@ -294,6 +294,8 @@ public abstract class Player extends MapObject {
 		getNextPosition();
 		checkTileMapCollision();
 		setPosition(xtemp, ytemp);
+		System.out.println("Player at X: "+x);
+		System.out.println("Player at Y: "+y);
 		//System.out.println("Player Y Position: "  +x) ;
 
 
