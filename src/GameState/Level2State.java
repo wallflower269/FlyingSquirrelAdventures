@@ -74,11 +74,11 @@ public class Level2State extends GameState {
             gsm.setState(GameStateManager.GAMEOVERSTATE);
             Game.stopMusic();
         }
-
-        // if (player.isAtPosition(3127, 166)) {
-        if (player.isAtPosition(142, 166)) {
-			gsm.setState(GameStateManager.WINNERSTATE);     // chuyển trạng thái level2/Winner
-		}
+//
+//        // if (player.isAtPosition(3127, 166)) {
+//        if (player.isAtPosition(3127, 166)) {
+//			gsm.setState(GameStateManager.WINNERSTATE);     // chuyển trạng thái level2/Winner
+//		}
     }
 
     private void populateEnemies() {
