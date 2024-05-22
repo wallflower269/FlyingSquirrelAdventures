@@ -24,6 +24,8 @@ public class Level1State extends GameState {
 	private HUD hud;
 	
 	private AudioPlayer bgMusic;
+
+	private Teleport teleport;  // local variable
 	
 	public Level1State(GameStateManager gsm) {
 		this.gsm = gsm;
@@ -55,14 +57,24 @@ public class Level1State extends GameState {
 		hud = new HUD(player);
 		
 		bgMusic = new AudioPlayer("/Music/level1-1.mp3");
-		bgMusic.play();
+		// bgMusic.play();
+
+		// Initialize and set the position of the teleport
+		teleport = new Teleport(tileMap);
+		// Khởi tạo Teleport với toạ độ mục tiêu và GameStateManager
+		// teleport.setPosition(3105, 183);  // vị trí của Teleport
+		teleport.setPosition(150, 183);  // vị trí của Teleport
 		
 	}
+
+	// check chuyển trạng thái
 	private void checkPlayerStatus() {
 		if (player.dead() == true) {  // Giả sử isDead() kiểm tra nếu trạng thái dead là true
 			gsm.setState(GameStateManager.GAMEOVERSTATE);
 			Game.stopMusic();
 		}
+
+
 	}
 	
 	private void populateEnemies() {
@@ -88,6 +100,10 @@ public class Level1State extends GameState {
 	public void update() {
 		// Update player
 		player.update();
+		
+		// update teleport
+		teleport.update();
+
 
 		// Set tilemap position
 		tileMap.setPosition(
@@ -127,6 +143,13 @@ public class Level1State extends GameState {
 			}
 
 		}
+
+				// them code
+		if (teleport != null) {
+			teleport.update();
+		}
+
+
 		//Thuc Minh: For level 2
 		checkForWin();
 	}
@@ -155,6 +178,13 @@ public class Level1State extends GameState {
 			explosions.get(i).draw(g);
 		}
 		
+
+		// Teleport
+		if (teleport != null) {
+			teleport.draw(g);
+		}
+
+
 		// draw hud
 		hud.draw(g);
 		
@@ -183,7 +213,8 @@ public class Level1State extends GameState {
 	//Thuc Minh: Try to add level 2
 	private void checkForWin() {
 		// Assuming the end of the level is at x = 2000 (for example)
-		if (player.getx() >= 3105) {
+		// if (player.getx() >= 3105) {
+		if (player.getx() >= 150) {
 			// Transition to the next level
 			gsm.setState(GameStateManager.LEVEL2STATE);
 		}

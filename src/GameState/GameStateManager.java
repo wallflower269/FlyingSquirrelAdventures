@@ -6,13 +6,12 @@ import java.util.ArrayList;
 public class GameStateManager {
 
 	// Existing constants
-	public static final int NUMGAMESTATES = 4;
-	public static final int GAMEOVERSTATE = 2;
 	public static final int MENUSTATE = 0;
 	public static final int LEVEL1STATE = 1;
-
+	public static final int GAMEOVERSTATE = 2;
 	// Additional constant for Level 2 state
 	public static final int LEVEL2STATE = 3;
+	public static final int NUMGAMESTATES = 4;
 
 	private GameState[] gameStates;
 	private int currentState;

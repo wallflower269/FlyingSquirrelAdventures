@@ -148,6 +148,19 @@ public abstract class Player extends MapObject {
 		sfx.put("scratch", new AudioPlayer("/SFX/scratch.mp3"));
 		
 	}
+
+	// thêm code:
+
+	public boolean intersectsTeleport(Teleport teleport) {
+		return this.intersects(teleport);
+	}
+
+	public boolean isAtPosition(int targetX, int targetY) {
+		return (int)x == targetX && (int)y == targetY;
+	}
+	
+	//
+
 	
 	public int getHealth() { return health; }
 	public int getMaxHealth() { return maxHealth; }
