@@ -85,19 +85,60 @@ public class Level2State extends GameState {
 
         enemies = new ArrayList<Enemy>();
 
-        Slugger s;
-        Point[] points = new Point[] {
-                new Point(200, 100),
-                new Point(860, 200),
-                new Point(1525, 200),
-                new Point(1680, 200),
-                new Point(1800, 200)
+        Bat b;
+        Point[] point4 = new Point[] {
+                new Point(100, 50),
+                new Point(740, 165),
+                new Point(860, 155),
+//                new Point(960, 100),
+//                new Point(2500, 70)
         };
-        for(int i = 0; i < points.length; i++) {
-            s = new Slugger(tileMap);
-            s.setPosition(points[i].x, points[i].y);
-            enemies.add(s);
+        for(int i = 0; i < point4.length; i++) {
+            b = new Bat(tileMap);
+            b.setPosition(point4[i].x, point4[i].y);
+            enemies.add(b);
         }
+
+        FlyingDragon f;
+        Point[] point5 = new Point[] {
+				new Point(100, 50),
+				new Point(740, 165),
+                new Point(860, 155),
+
+        };
+        for(int i = 0; i < point5.length; i++) {
+            f = new FlyingDragon(tileMap);
+            f.setPosition(point5[i].x, point5[i].y);
+            enemies.add(f);
+        }
+
+        Goblin g;
+        Point[] point7 = new Point[] {
+                new Point(360, 160),
+//                new Point(2400, 160),
+                new Point(650, 160)
+        };
+        for(int i = 0; i < point7.length; i++) {
+            g = new Goblin(tileMap);
+            g.setPosition(point7[i].x, point7[i].y);
+            enemies.add(g);
+        }
+
+//        Insect in;
+//		Point[] point8 = new Point[] {
+//				new Point(130, 150)
+////				new Point(680, 160),
+////				new Point(1550, 160),
+////				new Point(1970, 166),
+////				new Point(100, 160),
+////				new Point(2500, 155)
+////                new Point(2710, 160),
+//		};
+//		for(int i = 0; i < point8.length; i++) {
+//			in = new Insect(tileMap);
+//			in.setPosition(point8[i].x, point8[i].y);
+//			enemies.add(in);
+//		}
 
     }
 
