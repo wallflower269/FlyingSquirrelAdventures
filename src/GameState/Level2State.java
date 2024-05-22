@@ -74,12 +74,17 @@ public class Level2State extends GameState {
             gsm.setState(GameStateManager.GAMEOVERSTATE);
             Game.stopMusic();
         }
-//
-//        // if (player.isAtPosition(3127, 166)) {
-//        if (player.isAtPosition(3127, 166)) {
-//			gsm.setState(GameStateManager.WINNERSTATE);     // chuyển trạng thái level2/Winner
-//		}
     }
+
+
+    private void checkForWin() {
+		// Assuming the end of the level is at x = 2000 (for example)
+		if (player.getx() >= 3127) {
+		// if (player.getx() >= 143) {
+			// Transition to the next level
+			gsm.setState(GameStateManager.WINNERSTATE);
+		}
+	}
 
     private void populateEnemies() {
 
@@ -220,7 +225,7 @@ public class Level2State extends GameState {
                     (int)tileMap.getx(), (int)tileMap.gety());
             explosions.get(i).draw(g);
         }
-        
+
 		// Teleport
 		if (teleport != null) {
 			teleport.draw(g);
@@ -250,16 +255,6 @@ public class Level2State extends GameState {
         if(k == KeyEvent.VK_W) player.setJumping(false);
         if(k == KeyEvent.VK_E) player.setGliding(false);
     }
-
-
-    private void checkForWin() {
-		// Assuming the end of the level is at x = 2000 (for example)
-		if (player.getx() >= 3127) {
-		// if (player.getx() >= 143) {
-			// Transition to the next level
-			gsm.setState(GameStateManager.WINNERSTATE);
-		}
-	}
 
 }
 
