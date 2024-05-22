@@ -25,6 +25,8 @@ public class Level2State extends GameState {
 
     private AudioPlayer bgMusic;
 
+    private Teleport teleport;
+
     public Level2State(GameStateManager gsm) {
         this.gsm = gsm;
         init();
@@ -57,12 +59,26 @@ public class Level2State extends GameState {
         bgMusic = new AudioPlayer("/Music/level1-1.mp3");
         bgMusic.play();
 
+        // Initialize and set the position of the teleport
+        teleport = new Teleport(tileMap);
+        // Khởi tạo Teleport với toạ độ mục tiêu và GameStateManager
+        teleport.setPosition(3127, 150);  // vị trí của Teleport
+        // teleport.setPosition(142, 150);  // vị trí của Teleport
+
+        //
     }
+
+
     private void checkPlayerStatus() {
         if (player.dead() == true) {  // Giả sử isDead() kiểm tra nếu trạng thái dead là true
             gsm.setState(GameStateManager.GAMEOVERSTATE);
             Game.stopMusic();
         }
+
+        // if (player.isAtPosition(3127, 166)) {
+        if (player.isAtPosition(142, 166)) {
+			gsm.setState(GameStateManager.WINNERSTATE);     // chuyển trạng thái level2/Winner
+		}
     }
 
     private void populateEnemies() {
@@ -90,6 +106,10 @@ public class Level2State extends GameState {
         // update player
         player.update();
 
+        // UPDATE Teleport
+        teleport.update();
+
+
         tileMap.setPosition(
                 GamePanel.WIDTH / 2 - player.getx(),
                 GamePanel.HEIGHT / 2 - player.gety()
@@ -100,7 +120,12 @@ public class Level2State extends GameState {
 
         // attack enemies
         player.checkAttack(enemies);
-        checkPlayerStatus();
+
+		// Check player status (e.g., health, dead)
+		checkPlayerStatus();
+
+		// Check if player has reached the end of the level
+		checkForWin();
 
         // update all enemies
         for(int i = 0; i < enemies.size(); i++) {
@@ -127,6 +152,9 @@ public class Level2State extends GameState {
 
         }
 
+        // Next win
+        checkForWin();
+
     }
 
     public void draw(Graphics2D g) {
@@ -151,6 +179,11 @@ public class Level2State extends GameState {
                     (int)tileMap.getx(), (int)tileMap.gety());
             explosions.get(i).draw(g);
         }
+        
+		// Teleport
+		if (teleport != null) {
+			teleport.draw(g);
+		}
 
         // draw hud
         hud.draw(g);
@@ -176,6 +209,16 @@ public class Level2State extends GameState {
         if(k == KeyEvent.VK_W) player.setJumping(false);
         if(k == KeyEvent.VK_E) player.setGliding(false);
     }
+
+
+    private void checkForWin() {
+		// Assuming the end of the level is at x = 2000 (for example)
+		if (player.getx() >= 3127) {
+		// if (player.getx() >= 143) {
+			// Transition to the next level
+			gsm.setState(GameStateManager.WINNERSTATE);
+		}
+	}
 
 }
 

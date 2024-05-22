@@ -9,9 +9,11 @@ public class GameStateManager {
 	public static final int MENUSTATE = 0;
 	public static final int LEVEL1STATE = 1;
 	public static final int GAMEOVERSTATE = 2;
+	public static final int WINNERSTATE = 3;
 	// Additional constant for Level 2 state
-	public static final int LEVEL2STATE = 3;
-	public static final int NUMGAMESTATES = 4;
+	public static final int LEVEL2STATE = 4;
+	public static final int NUMGAMESTATES = 5;
+
 
 	private GameState[] gameStates;
 	private int currentState;
@@ -29,6 +31,8 @@ public class GameStateManager {
 			gameStates[state] = new Level1State(this);
 		else if (state == GAMEOVERSTATE)
 			gameStates[state] = new GameOverState(this);
+		else if (state == WINNERSTATE)
+			gameStates[state] = new WinnerState(this);
 			// Load Level2State when state is LEVEL2STATE
 		else if (state == LEVEL2STATE)
 			gameStates[state] = new Level2State(this);
@@ -71,11 +75,20 @@ public class GameStateManager {
 		gameStates[currentState].keyPressed(k);
 	}
 
+	// public void keyReleased(int k) {
+	// 	if (currentState >= 0 && currentState < NUMGAMESTATES) {
+	// 		gameStates[currentState].keyReleased(k);
+	// 	} else {
+	// 		System.out.println("Attempted to call keyReleased on invalid state index: " + currentState);
+	// 	}
+	// }
+
 	public void keyReleased(int k) {
-		if (currentState >= 0 && currentState < NUMGAMESTATES) {
+		System.out.println("Current State: " + currentState);
+		if (gameStates[currentState] != null) {
 			gameStates[currentState].keyReleased(k);
 		} else {
-			System.out.println("Attempted to call keyReleased on invalid state index: " + currentState);
+			System.out.println("Error: Current GameState is null!");
 		}
 	}
 }
