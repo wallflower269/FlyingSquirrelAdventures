@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 
 public class Game {
 	private static AudioPlayer bgMusic;
+	//
 
 	public static void main(String[] args) {
 		JFrame window = new JFrame("Flying Squirrel Adventure");
