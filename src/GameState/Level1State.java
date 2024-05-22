@@ -18,6 +18,8 @@ public class Level1State extends GameState {
 	private Player player;
 	
 	private ArrayList<Enemy> enemies;
+
+//	private ArrayList<DieEnemy> dieEnemies;
 	private ArrayList<Explosion> explosions;
 	
 	private HUD hud;
@@ -41,11 +43,12 @@ public class Level1State extends GameState {
 		
 		player = new Player(tileMap);
 		player.setPosition(100, 100);
-		
+
+//		dieEnemies = new ArrayList<>();
 		populateEnemies();
 		
 		explosions = new ArrayList<Explosion>();
-		
+
 		hud = new HUD(player);
 		
 		bgMusic = new AudioPlayer("/Music/level1-1.mp3");
@@ -55,22 +58,75 @@ public class Level1State extends GameState {
 	
 	private void populateEnemies() {
 		
-		enemies = new ArrayList<Enemy>();
+		enemies = new ArrayList<>();
 		
 		Slugger s;
-		Point[] points = new Point[] {
+		Point[] point1 = new Point[] {
 			new Point(200, 100),
-			new Point(860, 200),
-			new Point(1525, 200),
-			new Point(1680, 200),
-			new Point(1800, 200)
+			new Point(830, 200),
+			new Point(960, 200),
+			new Point(1550, 200)
+//			new Point(1800, 200)
 		};
-		for(int i = 0; i < points.length; i++) {
+		for(int i = 0; i < point1.length; i++) {
 			s = new Slugger(tileMap);
-			s.setPosition(points[i].x, points[i].y);
+			s.setPosition(point1[i].x, point1[i].y);
 			enemies.add(s);
 		}
-		
+
+		Dog d;
+		Point[] point2 = new Point[] {
+				new Point(250, 100),
+				new Point(860, 200),
+				new Point(1525, 200),
+				new Point(1680, 200),
+				new Point(1800, 200),
+				new Point(2400, 200)
+		};
+		for(int i = 0; i < point2.length; i++) {
+			d = new Dog(tileMap);
+			d.setPosition(point2[i].x, point2[i].y);
+			enemies.add(d);
+		}
+
+		Bat b;
+		Point[] point4 = new Point[] {
+				new Point(100, 50),
+				new Point(860, 155),
+//				new Point(960, 100),
+//				new Point(2500, 70)
+		};
+		for(int i = 0; i < point4.length; i++) {
+			b = new Bat(tileMap);
+			b.setPosition(point4[i].x, point4[i].y);
+			enemies.add(b);
+		}
+
+		Arachnik a;
+		Point[] point3 = new Point[] {
+				new Point(1000, 200),
+				new Point(1400, 65),
+				new Point(1625, 200),
+				new Point(2400, 200)
+		};
+		for(int i = 0; i < point3.length; i++) {
+			a = new Arachnik(tileMap);
+			a.setPosition(point3[i].x, point3[i].y);
+			enemies.add(a);
+		}
+
+		FlyingDragon f;
+		Point[] point5 = new Point[] {
+//				new Point(100, 50),
+//				new Point(860, 155),
+				new Point(960, 100),
+				new Point(2500, 70)
+		};
+		for(int i = 0; i < point5.length; i++) {
+			f = new FlyingDragon(tileMap);
+			f.setPosition(point5[i].x, point5[i].y);
+			enemies.add(f);
+		}
 	}
 	
 	public void update() {
@@ -95,8 +151,7 @@ public class Level1State extends GameState {
 			if(e.isDead()) {
 				enemies.remove(i);
 				i--;
-				explosions.add(
-					new Explosion(e.getx(), e.gety()));
+				explosions.add(new Explosion(e.getx(), e.gety()));
 			}
 		}
 		
@@ -126,6 +181,7 @@ public class Level1State extends GameState {
 		for(int i = 0; i < enemies.size(); i++) {
 			enemies.get(i).draw(g);
 		}
+
 		
 		// draw explosions
 		for(int i = 0; i < explosions.size(); i++) {
@@ -158,7 +214,8 @@ public class Level1State extends GameState {
 		if(k == KeyEvent.VK_W) player.setJumping(false);
 		if(k == KeyEvent.VK_E) player.setGliding(false);
 	}
-	
+
+
 }
 
 

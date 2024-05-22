@@ -187,7 +187,26 @@ public class TileMap {
 		}
 		
 	}
-	
+
+	public void setNumRows(int numRows) {
+		this.numRows = numRows;
+	}
+
+	public void setNumCols(int numCols) {
+		this.numCols = numCols;
+	}
+
+	public void setMap(int[][] map) {
+		this.map = map;
+	}
+
+	public int getNumRows() {
+		return numRows;
+	}
+
+	public int getNumCols() {
+		return numCols;
+	}
 }
 
 

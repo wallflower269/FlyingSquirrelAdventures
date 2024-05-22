@@ -3,7 +3,14 @@ package Entity;
 import TileMap.TileMap;
 
 public class Enemy extends MapObject {
-	
+
+	public enum EnemyType {
+		DOG,
+		BAT,
+		SLUGGER,
+		FLYINGDRAGON,
+		ARACHNIK
+	}
 	protected int health;
 	protected int maxHealth;
 	protected boolean dead;
@@ -30,7 +37,9 @@ public class Enemy extends MapObject {
 	}
 	
 	public void update() {}
-	
+
+	public EnemyType getType(){return null;
+	}
 }
 
 

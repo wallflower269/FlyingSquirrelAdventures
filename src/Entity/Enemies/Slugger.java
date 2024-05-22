@@ -105,14 +105,14 @@ public class Slugger extends Enemy {
 		if(right && dx == 0) {
 			right = false;
 			left = true;
-			facingRight = false;
+			facingRight = true;
 		}
 		else if(left && dx == 0) {
 			right = true;
 			left = false;
-			facingRight = true;
+			facingRight = false;
 		}
-		
+
 		// update animation
 		animation.update();
 		

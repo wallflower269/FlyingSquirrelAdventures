@@ -45,7 +45,8 @@ public abstract class MapObject {
 	protected int currentAction;
 	protected int previousAction;
 	protected boolean facingRight;
-	
+//	protected boolean facingLeft;
+
 	// movement
 	protected boolean left;
 	protected boolean right;
@@ -62,6 +63,10 @@ public abstract class MapObject {
 	protected double maxFallSpeed;
 	protected double jumpStart;
 	protected double stopJumpSpeed;
+
+	protected int health;
+	protected int maxHealth;
+	protected boolean dead;
 	
 	// constructor
 	public MapObject(TileMap tm) {
@@ -178,7 +183,8 @@ public abstract class MapObject {
 		this.dx = dx;
 		this.dy = dy;
 	}
-	
+
+
 	public void setMapPosition() {
 		xmap = tileMap.getx();
 		ymap = tileMap.gety();
