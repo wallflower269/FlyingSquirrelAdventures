@@ -40,7 +40,7 @@ public class Level1State extends GameState {
 		tileMap.setPosition(0, 0);
 		tileMap.setTween(1);
 		
-		bg = new Background("/Backgrounds/grassbg1.gif", 0.1);
+		bg = new Background("/Backgrounds/m2.jpg", 0.1);
 
 		player = new Player(tileMap , gsm) {
 			@Override

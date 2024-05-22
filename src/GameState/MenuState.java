@@ -28,14 +28,14 @@ public class MenuState extends GameState {
 		
 		try {
 			
-			bg = new Background("/Backgrounds/menubg.gif", 1);
+			bg = new Background("/Backgrounds/Background_could.png", 1);
 			bg.setVector(-0.1, 0);
 			
-			titleColor = new Color(128, 0, 0);
+			titleColor = new Color(241, 58, 17);
 			titleFont = new Font(
 					"Century Gothic",
-					Font.PLAIN,
-					28);
+					Font.BOLD,
+					30);
 			
 			font = new Font("Arial", Font.PLAIN, 12);
 			
@@ -63,10 +63,11 @@ public class MenuState extends GameState {
 		// draw title
 		g.setColor(titleColor);
 		g.setFont(titleFont);
-		g.drawString("Dragon Tale", 80, 70);
+		g.drawString("Flying Squirrel", 60, 70);
 		
 		// draw menu options
 		g.setFont(font);
+
 		for(int i = 0; i < options.length; i++) {
 			if(i == currentChoice) {
 				g.setColor(Color.BLACK);
