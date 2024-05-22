@@ -8,7 +8,7 @@ public class Game {
 	private static AudioPlayer bgMusic;
 
 	public static void main(String[] args) {
-		JFrame window = new JFrame("Flying Squirrel Adventure");
+		JFrame window = new JFrame("Flying Squirrel mey");
 		window.setContentPane(new GamePanel());
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setResizable(false);
