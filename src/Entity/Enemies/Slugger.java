@@ -65,22 +65,29 @@ public class Slugger extends Enemy {
 	private void getNextPosition() {
 		
 		// movement
-		if(left) {
-			dx -= moveSpeed;
-			if(dx < -maxSpeed) {
-				dx = -maxSpeed;
-			}
-		}
-		else if(right) {
-			dx += moveSpeed;
-			if(dx > maxSpeed) {
-				dx = maxSpeed;
-			}
-		}
-		
-		// falling
+//		if(left) {
+//			dx -= moveSpeed;
+//			if(dx < -maxSpeed) {
+//				dx = -maxSpeed;
+//			}
+//		}
+//		else if(right) {
+//			dx += moveSpeed;
+//			if(dx > maxSpeed) {
+//				dx = maxSpeed;
+//			}
+//		}
+//
+//		// falling
+//		if(falling) {
+//			dy += fallSpeed;
+//		}
+		if(left) dx = -moveSpeed;
+		else if(right) dx = moveSpeed;
+		else dx = 0;
 		if(falling) {
 			dy += fallSpeed;
+			if(dy > maxFallSpeed) dy = maxFallSpeed;
 		}
 		
 	}
@@ -90,8 +97,22 @@ public class Slugger extends Enemy {
 		// update position
 		getNextPosition();
 		checkTileMapCollision();
+		calculateCorners(x, ydest + 1);
+		if(!bottomLeft) {
+			left = false;
+			right = facingRight = true;
+		}
+		if(!bottomRight) {
+			left = true;
+			right = facingRight = false;
+		}
+
 		setPosition(xtemp, ytemp);
-		
+		if(dx == 0) {
+			left = !left;
+			right = !right;
+			facingRight = !facingRight;
+		}
 		// check flinching
 		if(flinching) {
 			long elapsed =
@@ -102,16 +123,16 @@ public class Slugger extends Enemy {
 		}
 		
 		// if it hits a wall, go other direction
-		if(right && dx == 0) {
-			right = false;
-			left = true;
-			facingRight = false;
-		}
-		else if(left && dx == 0) {
-			right = true;
-			left = false;
-			facingRight = true;
-		}
+//		if(right && dx == 0) {
+//			right = false;
+//			left = true;
+//			facingRight = false;
+//		}
+//		else if(left && dx == 0) {
+//			right = true;
+//			left = false;
+//			facingRight = true;
+//		}
 		
 		// update animation
 		animation.update();

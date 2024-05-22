@@ -90,13 +90,28 @@ public class Level2State extends GameState {
 
         enemies = new ArrayList<Enemy>();
 
+        Slugger s;
+        Point[] point1 = new Point[] {
+                new Point(936, 106),
+                new Point(1427, 160),
+                new Point(1723, 160),
+                new Point(1900, 160),
+                new Point(2416, 160),
+                new Point(2630, 160)
+        };
+        for(int i = 0; i < point1.length; i++) {
+            s = new Slugger(tileMap);
+            s.setPosition(point1[i].x, point1[i].y);
+            enemies.add(s);
+        }
+
         Bat b;
         Point[] point4 = new Point[] {
-                new Point(100, 50),
-                new Point(740, 165),
-                new Point(860, 155),
-//                new Point(960, 100),
-//                new Point(2500, 70)
+//                new Point(100, 50),
+                new Point(980, 73),
+                new Point(1886, 110),
+//                new Point(2530, 102),
+//                new Point(2770, 105)
         };
         for(int i = 0; i < point4.length; i++) {
             b = new Bat(tileMap);
@@ -104,24 +119,26 @@ public class Level2State extends GameState {
             enemies.add(b);
         }
 
-        FlyingDragon f;
-        Point[] point5 = new Point[] {
-				new Point(100, 50),
-				new Point(740, 165),
-                new Point(860, 155),
-
-        };
-        for(int i = 0; i < point5.length; i++) {
-            f = new FlyingDragon(tileMap);
-            f.setPosition(point5[i].x, point5[i].y);
-            enemies.add(f);
-        }
+//        FlyingDragon f;
+//        Point[] point5 = new Point[] {
+//				new Point(100, 50),
+//				new Point(740, 165),
+//                new Point(860, 155),
+//
+//        };
+//        for(int i = 0; i < point5.length; i++) {
+//            f = new FlyingDragon(tileMap);
+//            f.setPosition(point5[i].x, point5[i].y);
+//            enemies.add(f);
+//        }
 
         Goblin g;
         Point[] point7 = new Point[] {
-                new Point(360, 160),
+//                new Point(360, 160),
 //                new Point(2400, 160),
-                new Point(650, 160)
+                new Point(650, 160),
+                new Point(1843, 106),
+                new Point(2670, 160)
         };
         for(int i = 0; i < point7.length; i++) {
             g = new Goblin(tileMap);
