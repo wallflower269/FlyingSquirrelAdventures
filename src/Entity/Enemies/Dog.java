@@ -19,8 +19,8 @@ public class Dog extends Enemy{
         fallSpeed = 0.2;
         maxFallSpeed = 10.0;
 
-        width = 30;
-        height = 45;
+        width = 31;
+        height = 37;
         cwidth = 20;
         cheight = 20;
 

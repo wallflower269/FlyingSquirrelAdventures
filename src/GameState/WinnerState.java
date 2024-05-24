@@ -19,7 +19,7 @@ public class WinnerState extends GameState {
     private BufferedImage background;
 
 
-    private String[] options = {"Resume",
+    private String[] options = {"Restart",
                                 "Next Level",
                                 "Menu"};
     private int currentChoice = 0;

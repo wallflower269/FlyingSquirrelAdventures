@@ -90,22 +90,9 @@ public class Level1State extends GameState {
 		
 		enemies = new ArrayList<Enemy>();
 
-		Slugger s;
-		Point[] point1 = new Point[] {
-				new Point(200, 100),
-				new Point(830, 200),
-				new Point(960, 200),
-				new Point(1550, 200),
-		};
-		for(int i = 0; i < point1.length; i++) {
-			s = new Slugger(tileMap);
-			s.setPosition(point1[i].x, point1[i].y);
-			enemies.add(s);
-		}
-
 		Dog d;
-		Point[] point2 = new Point[] {
-				new Point(250, 100),
+		Point[] point1 = new Point[] {
+//				new Point(250, 100),
 				new Point(860, 200),
 				new Point(1525, 200),
 				new Point(1680, 200),
@@ -113,26 +100,25 @@ public class Level1State extends GameState {
 				new Point(2400, 200),
 				new Point(3000,198)
 		};
-		for(int i = 0; i < point2.length; i++) {
+		for(int i = 0; i < point1.length; i++) {
 			d = new Dog(tileMap);
-			d.setPosition(point2[i].x, point2[i].y);
+			d.setPosition(point1[i].x, point1[i].y);
 			enemies.add(d);
 		}
 
-//		Cat c;
-//		Point[] point9 = new Point[] {
-//				new Point(250, 100),
-////				new Point(860, 200),
-////				new Point(1525, 200),
-//				new Point(1680, 200),
-//				new Point(1800, 200),
-//				new Point(2400, 200)
-//		};
-//		for(int i = 0; i < point9.length; i++) {
-//			c = new Cat(tileMap);
-//			c.setPosition(point9[i].x, point9[i].y);
-//			enemies.add(c);
-//		}
+		Insect ins;
+		Point[] point2 = new Point[] {
+//				new Point(200, 198),
+				new Point(830, 198),
+				new Point(960, 198),
+				new Point(1550, 198),
+//			new Point(1800, 200)
+		};
+		for(int i = 0; i < point2.length; i++) {
+			ins = new Insect(tileMap);
+			ins.setPosition(point2[i].x, point2[i].y);
+			enemies.add(ins);
+		}
 
 		Arachnik a;
 		Point[] point3 = new Point[] {
@@ -148,20 +134,18 @@ public class Level1State extends GameState {
 			enemies.add(a);
 		}
 
-		Parrot p;
-		Point[] point6 = new Point[] {
-				new Point(100, 50),
-//				new Point(860, 155),
+		Sparrow sp;
+		Point[] point4 = new Point[] {
+//				new Point(100, 50),
+				new Point(860, 155),
 				new Point(960, 100),
 				new Point(2500, 70)
 		};
-		for(int i = 0; i < point6.length; i++) {
-			p = new Parrot(tileMap);
-			p.setPosition(point6[i].x, point6[i].y);
-			enemies.add(p);
+		for(int i = 0; i < point4.length; i++) {
+			sp = new Sparrow(tileMap);
+			sp.setPosition(point4[i].x, point4[i].y);
+			enemies.add(sp);
 		}
-
-		
 	}
 
 	public void update() {

@@ -91,76 +91,78 @@ public class Level2State extends GameState {
         enemies = new ArrayList<Enemy>();
 
         Slugger s;
-        Point[] point1 = new Point[] {
+        Point[] point5 = new Point[]{
                 new Point(936, 106),
                 new Point(1427, 160),
                 new Point(1723, 160),
+//                new Point(1900, 160),
+//                new Point(2416, 160),
+//                new Point(2630, 160)
+        };
+        for (int i = 0; i < point5.length; i++) {
+            s = new Slugger(tileMap);
+            s.setPosition(point5[i].x, point5[i].y);
+            enemies.add(s);
+        }
+
+        Worm w;
+        Point[] point6 = new Point[]{
                 new Point(1900, 160),
                 new Point(2416, 160),
                 new Point(2630, 160)
         };
-        for(int i = 0; i < point1.length; i++) {
-            s = new Slugger(tileMap);
-            s.setPosition(point1[i].x, point1[i].y);
-            enemies.add(s);
+        for (int i = 0; i < point6.length; i++) {
+            w = new Worm(tileMap);
+            w.setPosition(point6[i].x, point6[i].y);
+            enemies.add(w);
         }
 
-        Bat b;
-        Point[] point4 = new Point[] {
-//                new Point(100, 50),
+        Parrot p;
+		Point[] point7 = new Point[] {
                 new Point(980, 73),
-                new Point(1886, 110),
-//                new Point(2530, 102),
-//                new Point(2770, 105)
+                new Point(1886, 110)
+		};
+		for(int i = 0; i < point7.length; i++) {
+			p = new Parrot(tileMap);
+			p.setPosition(point7[i].x, point7[i].y);
+			enemies.add(p);
+		}
+
+        Bat b;
+        Point[] point8 = new Point[]{
+//                new Point(980, 73),
+//                new Point(1886, 110),
+                new Point(2530, 102),
+                new Point(2770, 105)
         };
-        for(int i = 0; i < point4.length; i++) {
+        for (int i = 0; i < point8.length; i++) {
             b = new Bat(tileMap);
-            b.setPosition(point4[i].x, point4[i].y);
+            b.setPosition(point8[i].x, point8[i].y);
             enemies.add(b);
         }
 
-//        FlyingDragon f;
-//        Point[] point5 = new Point[] {
-//				new Point(100, 50),
-//				new Point(740, 165),
-//                new Point(860, 155),
-//
-//        };
-//        for(int i = 0; i < point5.length; i++) {
-//            f = new FlyingDragon(tileMap);
-//            f.setPosition(point5[i].x, point5[i].y);
-//            enemies.add(f);
-//        }
-
         Goblin g;
-        Point[] point7 = new Point[] {
-//                new Point(360, 160),
-//                new Point(2400, 160),
+        Point[] point9 = new Point[]{
                 new Point(650, 160),
-                new Point(1843, 106),
-                new Point(2670, 160)
+                new Point(1843, 106)
         };
-        for(int i = 0; i < point7.length; i++) {
+        for (int i = 0; i < point9.length; i++) {
             g = new Goblin(tileMap);
-            g.setPosition(point7[i].x, point7[i].y);
+            g.setPosition(point9[i].x, point9[i].y);
             enemies.add(g);
         }
 
-//        Insect in;
-//		Point[] point8 = new Point[] {
-//				new Point(130, 150)
-////				new Point(680, 160),
-////				new Point(1550, 160),
-////				new Point(1970, 166),
-////				new Point(100, 160),
-////				new Point(2500, 155)
-////                new Point(2710, 160),
-//		};
-//		for(int i = 0; i < point8.length; i++) {
-//			in = new Insect(tileMap);
-//			in.setPosition(point8[i].x, point8[i].y);
-//			enemies.add(in);
-//		}
+        LadyBug l;
+        Point[] point10 = new Point[]{
+                new Point(665, 160),
+                new Point(1860, 106),
+                new Point(2685, 160)
+        };
+        for (int i = 0; i < point10.length; i++) {
+            l = new LadyBug(tileMap);
+            l.setPosition(point10[i].x, point10[i].y);
+            enemies.add(l);
+        }
 
     }
 
