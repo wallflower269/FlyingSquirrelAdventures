@@ -19,8 +19,8 @@ public class Sparrow extends Enemy {
         fallSpeed = 0.2;
         maxFallSpeed = 10.0;
 
-        width = 33;
-        height = 35;
+        width = 32;
+        height = 36;
         cwidth = 10;
         cheight = 10;
 
@@ -32,11 +32,11 @@ public class Sparrow extends Enemy {
 
             BufferedImage spritesheet = ImageIO.read(
                     getClass().getResourceAsStream(
-                            "/Sprites/Enemies/sparrow.gif"
+                            "/Sprites/Enemies/bird.gif"
                     )
             );
 
-            sprites = new BufferedImage[4];
+            sprites = new BufferedImage[3];
             for(int i = 0; i < sprites.length; i++) {
                 sprites[i] = spritesheet.getSubimage(
                         i * width,

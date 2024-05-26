@@ -7,36 +7,41 @@ import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
 
 import javax.imageio.ImageIO;
+
 public class Insect extends Enemy {
     private BufferedImage[] sprites;
 
     public Insect(TileMap tm) {
-
         super(tm);
 
-        moveSpeed = 0.7;
-        maxSpeed = 0.3;
+        moveSpeed = 1;
+        maxSpeed = 1;
         fallSpeed = 0.2;
         maxFallSpeed = 10.0;
 
-        width = 39;
-        height = 21;
+        // Adjusting width and height to match the desired subimage size
+        width = 32;
+        height = 36;
         cwidth = 20;
         cheight = 20;
 
         health = maxHealth = 1;
         damage = 1;
 
-        // load sprites
+        // Load sprites
         try {
+            BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Sprites/Enemies/burt.gif"));
 
-            BufferedImage spritesheet = ImageIO.read(
-                    getClass().getResourceAsStream(
-                            "/Sprites/Enemies/insect.gif"
-                    )
-            );
-
+            /* Minh: Need to scale?
             sprites = new BufferedImage[4];
+
+            for(int i = 0; i < sprites.length; i++) {
+                // Scale the subimage to match the desired size
+                sprites[i] = scaleImage(spritesheet.getSubimage(i * 94, 0, 94, 72), width, height);
+            }
+
+             */
+            sprites = new BufferedImage[8];
             for(int i = 0; i < sprites.length; i++) {
                 sprites[i] = spritesheet.getSubimage(
                         i * width,
@@ -45,9 +50,7 @@ public class Insect extends Enemy {
                         height
                 );
             }
-
-        }
-        catch(Exception e) {
+        } catch(Exception e) {
             e.printStackTrace();
         }
 
@@ -57,11 +60,17 @@ public class Insect extends Enemy {
 
         right = true;
         facingRight = true;
+    }
 
+    private BufferedImage scaleImage(BufferedImage image, int width, int height) {
+        BufferedImage scaledImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D graphics2D = scaledImage.createGraphics();
+        graphics2D.drawImage(image, 0, 0, width, height, null);
+        graphics2D.dispose();
+        return scaledImage;
     }
 
     private void getNextPosition() {
-
         // movement
         if(left) {
             dx -= moveSpeed;
@@ -83,7 +92,6 @@ public class Insect extends Enemy {
     }
 
     public void update() {
-
         // update position
         getNextPosition();
         checkTileMapCollision();
@@ -107,8 +115,7 @@ public class Insect extends Enemy {
 
         // check flinching
         if(flinching) {
-            long elapsed =
-                    (System.nanoTime() - flinchTimer) / 1000000;
+            long elapsed = (System.nanoTime() - flinchTimer) / 1000000;
             if(elapsed > 400) {
                 flinching = false;
             }
@@ -119,12 +126,7 @@ public class Insect extends Enemy {
     }
 
     public void draw(Graphics2D g) {
-
-//        if(notOnScreen()) return;
-
         setMapPosition();
-
         super.draw(g);
-
     }
 }

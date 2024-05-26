@@ -32,18 +32,21 @@ public class Dog extends Enemy{
 
             BufferedImage spritesheet = ImageIO.read(
                     getClass().getResourceAsStream(
-                            "/Sprites/Enemies/dog.gif"
+                            "/Sprites/Enemies/GerDog.gif"
                     )
             );
 
-            sprites = new BufferedImage[1];
-            for(int i = 0; i < sprites.length; i++) {
-                sprites[i] = spritesheet.getSubimage(
-                        i * width,
+            sprites = new BufferedImage[5];
+            for (int i = 0; i < sprites.length; i++) {
+                BufferedImage originalSprite = spritesheet.getSubimage(
+                        i * 30, // Assuming the original width in the spritesheet is 30
                         0,
-                        width,
-                        height
+                        30, // Original width
+                        20  // Original height
                 );
+
+                // Resize the sprite to 40x40
+                sprites[i] = resizeImage(originalSprite, width, height);
             }
 
         }
@@ -58,6 +61,13 @@ public class Dog extends Enemy{
         right = true;
         facingRight = true;
 
+    }
+    private BufferedImage resizeImage(BufferedImage originalImage, int targetWidth, int targetHeight) {
+        BufferedImage resizedImage = new BufferedImage(targetWidth, targetHeight, originalImage.getType());
+        Graphics2D g = resizedImage.createGraphics();
+        g.drawImage(originalImage, 0, 0, targetWidth, targetHeight, null);
+        g.dispose();
+        return resizedImage;
     }
 
     private void getNextPosition() {
