@@ -33,7 +33,7 @@ public class Level2State extends GameState {
     }
 
     public void init() {
-
+        Game.playMusic();
         tileMap = new TileMap(30);
         tileMap.loadTiles("/Tilesets/grasstileset.gif");
         tileMap.loadMap("/Maps/level2-2.map");
@@ -56,8 +56,8 @@ public class Level2State extends GameState {
 
         hud = new HUD(player);
 
-        bgMusic = new AudioPlayer("/Music/level1-1.mp3");
-        bgMusic.play();
+        //bgMusic = new AudioPlayer("/Music/level1-1.mp3");
+        //bgMusic.play();
 
         // Initialize and set the position of the teleport
         teleport = new Teleport(tileMap);

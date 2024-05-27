@@ -47,7 +47,7 @@ public class MenuState extends GameState {
     }
 
     public void init() {
-        Game.playMusic();
+
 
     }
 

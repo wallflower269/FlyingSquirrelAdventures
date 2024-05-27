@@ -37,7 +37,7 @@ public class Game {
 		window.setVisible(true);
 
 		// Initialize background music
-		bgMusic = new AudioPlayer("Resources/Music/Juhani Junkala [Retro Game Music Pack] Title Screen.wav");
+		bgMusic = new AudioPlayer("D:\\Users\\ttnhu\\Desktop\\PDM\\FlyingSquirrelAdventures\\Resources\\Music\\Salt-Marsh-Birds.wav");
 		bgMusic.loop();
 	}
 

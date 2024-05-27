@@ -33,6 +33,7 @@ public class Level1State extends GameState {
 	}
 	
 	public void init() {
+		Game.playMusic();
 		
 		tileMap = new TileMap(30);
 		tileMap.loadTiles("/Tilesets/grasstileset.gif");
