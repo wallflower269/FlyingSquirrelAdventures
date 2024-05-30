@@ -32,27 +32,25 @@ public class Dog extends Enemy{
 
             BufferedImage spritesheet = ImageIO.read(
                     getClass().getResourceAsStream(
-                            "/Sprites/Enemies/GerDog.gif"
+                            "/Sprites/Enemies/dog.gif"
                     )
             );
 
-            sprites = new BufferedImage[5];
-            for (int i = 0; i < sprites.length; i++) {
-                BufferedImage originalSprite = spritesheet.getSubimage(
-                        i * 30, // Assuming the original width in the spritesheet is 30
+            sprites = new BufferedImage[3];
+            for(int i = 0; i < sprites.length; i++) {
+                sprites[i] = spritesheet.getSubimage(
+                        i * width,
                         0,
-                        30, // Original width
-                        20  // Original height
+                        width,
+                        height
                 );
-
-                // Resize the sprite to 40x40
-                sprites[i] = resizeImage(originalSprite, width, height);
             }
 
         }
         catch(Exception e) {
             e.printStackTrace();
         }
+
 
         animation = new Animation();
         animation.setFrames(sprites);

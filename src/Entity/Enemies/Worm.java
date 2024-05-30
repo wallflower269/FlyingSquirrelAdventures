@@ -32,7 +32,7 @@ public class Worm extends Enemy {
 
             BufferedImage spritesheet = ImageIO.read(
                     getClass().getResourceAsStream(
-                            "/Sprites/Enemies/eyeball.gif"
+                            "/Sprites/Enemies/worm.gif"
                     )
             );
 
