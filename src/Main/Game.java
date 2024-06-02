@@ -37,8 +37,7 @@ public class Game {
 		window.setVisible(true);
 
 		// Initialize background music
-		bgMusic = new AudioPlayer("Resources\\Music\\Salt-Marsh-Birds.wav");
-		bgMusic.loop();
+		bgMusic = new AudioPlayer("Resources\\Music\\the_field_of_dreams.wav");
 	}
 
 	public static void stopMusic() {

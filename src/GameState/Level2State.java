@@ -56,8 +56,8 @@ public class Level2State implements GameState {
 
         // Initialize and set the position of the teleport
         teleport = new Teleport(tileMap);
-//        teleport.setPosition(3127, 150);
-         teleport.setPosition(142, 150);  // vị trí của Teleport  test
+            teleport.setPosition(3127, 150);
+  //       teleport.setPosition(142, 150);  // vị trí của Teleport  test
 
     }
 

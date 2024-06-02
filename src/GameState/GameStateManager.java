@@ -1,125 +1,129 @@
 package GameState;
 
-import java.util.ArrayList;
-
+import java.awt.Graphics2D;
+import java.util.Stack;
 
 public class GameStateManager {
-
-	// Existing constants
 	public static final int MENUSTATE = 0;
 	public static final int LEVEL1STATE = 1;
 	public static final int GAMEOVERSTATE = 2;
 	public static final int WINNERSTATE = 3;
-
-	// Additional constant for Level 2 state
 	public static final int LEVEL2STATE = 4;
-	// Setting
-	public static final int SETTINGSTATE = 5;
+	public static final int HEPSTATE = 5;
+	public static final int HelpState = 6;
 
-	// Help
-	public static final int HELPSTATE = 6;
 	public static final int NUMGAMESTATES = 7;
-
 
 	private GameState[] gameStates;
 	private int currentState;
+	private Stack<Integer> stateHistory;
 
 	public GameStateManager() {
 		gameStates = new GameState[NUMGAMESTATES];
+		stateHistory = new Stack<>();
 		currentState = MENUSTATE;
 		loadState(currentState);
 	}
 
 	private void loadState(int state) {
-		if (state == MENUSTATE)
-			gameStates[state] = new MenuState(this);
-		else if (state == LEVEL1STATE)
-			gameStates[state] = new Level1State(this);
-		else if (state == GAMEOVERSTATE)
-			gameStates[state] = new GameOverState(this);
-		else if (state == WINNERSTATE)
-			gameStates[state] = new WinnerState(this);
-			// Load Level2State when state is LEVEL2STATE
-		else if (state == LEVEL2STATE)
-			gameStates[state] = new Level2State(this);
-//		else if (state == SETTINGSTATE)
-//			gameStates[state] = new SettingState(this);
-		else if (state == HELPSTATE)
-			gameStates[state] = new HelpState(this);
+	//	System.out.println("Loading state: " + state);
+		try {
+			if (state == MENUSTATE) {
+				gameStates[state] = new MenuState(this);
+			} else if (state == LEVEL1STATE) {
+				gameStates[state] = new Level1State(this);
+			} else if (state == GAMEOVERSTATE) {
+				gameStates[state] = new GameOverState(this);
+			} else if (state == WINNERSTATE) {
+				gameStates[state] = new WinnerState(this);
+			} else if (state == LEVEL2STATE) {
+				gameStates[state] = new Level2State(this);
+			} else if (state == HelpState) {
+				gameStates[state] = new HelpState(this);
+			}
+			if (gameStates[state] != null) {
+				System.out.println("Initializing state: " + state);
+				gameStates[state].init();
+			} else {
+				System.out.println("Error: Failed to load state " + state);
+			}
+		} catch (Exception e) {
+			System.out.println("Exception loading state " + state + ": " + e.getMessage());
+			e.printStackTrace();
+		}
 	}
 
 	private void unloadState(int state) {
+	//	System.out.println("Unloading state: " + state);
 		gameStates[state] = null;
 	}
 
-	// public void setState(int state) {
-	//     currentState = state;
-	//     // Khởi tạo trạng thái mới
-	// }
+	public void setState(int state) {
+	//	System.out.println("Unloading current state: " + currentState);
+		unloadState(currentState);
+		stateHistory.push(currentState); // Lưu trạng thái hiện tại vào stack trước khi chuyển trạng thái
+		currentState = state;
+	//	System.out.println("Loading new state: " + currentState);
+		loadState(currentState);
+	//	System.out.println("State changed to: " + currentState);
+	}
+
+	public void update() {
+		if (gameStates[currentState] != null) {
+			try {
+				gameStates[currentState].update();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println("Error: Current game state is null during update");
+		}
+	}
+
+	public void draw(Graphics2D g) {
+		if (gameStates[currentState] != null) {
+			try {
+				gameStates[currentState].draw(g);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println("Error: Current game state is null during draw");
+		}
+	}
+
+	public void keyPressed(int k) {
+		if (gameStates[currentState] != null) {
+			gameStates[currentState].keyPressed(k);
+		} else {
+			System.out.println("Error: Current game state is null during keyPressed");
+		}
+	}
+
+	public void keyReleased(int k) {
+		//System.out.println("Current State: " + currentState);
+		if (gameStates[currentState] != null) {
+			gameStates[currentState].keyReleased(k);
+		} else {
+			System.out.println("Error: Current GameState is null during keyReleased");
+		}
+	}
 
 	public int getCurrentState() {
 		return currentState;
 	}
 
-	public void setState(int state) {
-		// Check if the state index is within bounds
-		if (state < 0 || state >= NUMGAMESTATES) {
-			System.out.println("Invalid state index: " + state);
-			return;
+	public int getPreviousState() { // Lấy trạng thái trước đó từ stack
+		if (stateHistory.size() < 2) {
+			return -1; // Không có trạng thái trước đó
 		}
-		unloadState(currentState);
-		currentState = state;
-		loadState(currentState);
-		gameStates[currentState].init();
-		System.out.println("State changed to: " + currentState);
+		return stateHistory.get(stateHistory.size() - 2); // Lấy trạng thái trước đó nữa
 	}
 
-	public void update() {
-		try {
-			gameStates[currentState].update();
-		} catch (Exception e) {
-			// Handle exceptions
+	public int popPreviousState() { // Lấy và loại bỏ trạng thái trước đó từ stack
+		if (!stateHistory.isEmpty()) {
+			return stateHistory.pop();
 		}
-	}
-
-	public void draw(java.awt.Graphics2D g) {
-		try {
-			gameStates[currentState].draw(g);
-		} catch (Exception e) {
-			// Handle exceptions
-		}
-	}
-
-	public void keyPressed(int k) {
-		gameStates[currentState].keyPressed(k);
-	}
-
-	// public void keyReleased(int k) {
-	// 	if (currentState >= 0 && currentState < NUMGAMESTATES) {
-	// 		gameStates[currentState].keyReleased(k);
-	// 	} else {
-	// 		System.out.println("Attempted to call keyReleased on invalid state index: " + currentState);
-	// 	}
-	// }
-
-	public void keyReleased(int k) {
-		System.out.println("Current State: " + currentState);
-		if (gameStates[currentState] != null) {
-			gameStates[currentState].keyReleased(k);
-		} else {
-			System.out.println("Error: Current GameState is null!");
-		}
+		return -1; // Trả về giá trị không hợp lệ nếu stack trống
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-

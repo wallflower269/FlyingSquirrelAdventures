@@ -3,6 +3,7 @@ package GameState;
 import java.awt.Graphics2D;
 
 public interface GameState {
+
     void init();
     void update();
     void draw(Graphics2D g);
@@ -12,8 +13,10 @@ public interface GameState {
 
 // public abstract class GameState {
 	
-// 	protected GameStateManager gsm;
-	
+ //	protected GameStateManager gsm;
+
+
+
 // 	public abstract void init();
 // 	public abstract void update();
 // 	public abstract void draw(java.awt.Graphics2D g);
