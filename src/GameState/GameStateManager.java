@@ -10,7 +10,7 @@ public class GameStateManager {
 	public static final int WINNERSTATE = 3;
 	public static final int LEVEL2STATE = 4;
 	public static final int HEPSTATE = 5;
-	public static final int HelpState = 6;
+	public static final int SETTINGSTATE = 6;
 
 	public static final int NUMGAMESTATES = 7;
 
@@ -38,8 +38,10 @@ public class GameStateManager {
 				gameStates[state] = new WinnerState(this);
 			} else if (state == LEVEL2STATE) {
 				gameStates[state] = new Level2State(this);
-			} else if (state == HelpState) {
+			} else if (state == HEPSTATE) {
 				gameStates[state] = new HelpState(this);
+			}  else if (state == SETTINGSTATE) {
+			gameStates[state] = new SettingState(this);
 			}
 			if (gameStates[state] != null) {
 				System.out.println("Initializing state: " + state);

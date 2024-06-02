@@ -78,12 +78,20 @@ public class HelpState implements GameState {
     }
 
     public void keyPressed(int k) {
-        if (k == KeyEvent.VK_ENTER) {
+        if (k == KeyEvent.VK_BACK_SPACE) {
             select();
         }
     }
 
     public void keyReleased(int k) {
         // Xử lý sự kiện khi có phím được thả ra, có thể không cần thiết
+
     }
 }
+
+
+
+/*
+Link: https://www.freepik.com/free-vector/game-wooden-interface-elements-set_9509858.htm#query=game%20menu%20background&position=0&from_view=keyword&track=ais_user&uuid=96ae9222-66e9-40dc-aef2-faa896470fa7
+https://www.canva.com/design/DAGG7HYO3AI/MUBtewbm-oXGn3RlEB5G8Q/edit?ui=eyJEIjp7IkoiOnsiQiI6eyJBPyI6IkIifX19LCJBIjp7IkEiOiJkb3dubG9hZF9wbmciLCJGIjp0cnVlfSwiRyI6eyJEIjp7IkQiOnsiQT8iOiJBIiwiQSI6IkIifX19fQ
+* */

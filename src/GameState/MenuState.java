@@ -16,6 +16,7 @@ public class MenuState implements GameState {
     private String[] options = {
             "Start",
             "Help",
+            "Setting",
             "Quit"
     };
 
@@ -86,9 +87,12 @@ public class MenuState implements GameState {
             gsm.setState(GameStateManager.LEVEL1STATE);
         }
         if(currentChoice == 1) {
-            gsm.setState(GameStateManager.HelpState);
+            gsm.setState(GameStateManager.HEPSTATE);
         }
         if(currentChoice == 2) {
+            gsm.setState(GameStateManager.SETTINGSTATE);
+        }
+        if(currentChoice == 3) {
             System.exit(0);
         }
     }
