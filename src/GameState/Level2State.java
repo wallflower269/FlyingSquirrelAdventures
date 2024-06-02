@@ -11,7 +11,10 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-public class Level2State extends GameState {
+
+public class Level2State implements GameState {
+    private GameStateManager gsm;
+// public class Level2State extends GameState {
 
     private TileMap tileMap;
     private Background bg;
@@ -53,7 +56,9 @@ public class Level2State extends GameState {
 
         // Initialize and set the position of the teleport
         teleport = new Teleport(tileMap);
-        teleport.setPosition(3127, 150);
+//        teleport.setPosition(3127, 150);
+         teleport.setPosition(142, 150);  // vị trí của Teleport  test
+
     }
 
     private void checkPlayerStatus() {
@@ -65,6 +70,7 @@ public class Level2State extends GameState {
 
     private void checkForWin() {
         if (player.getx() >= 3127) {
+//        if (player.getx() >= 143) {
             gsm.setState(GameStateManager.WINNERSTATE);
         }
     }

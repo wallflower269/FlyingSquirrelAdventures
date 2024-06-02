@@ -11,7 +11,10 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-public class Level1State extends GameState {
+
+public class Level1State implements GameState {
+    private GameStateManager gsm;
+// public class Level1State extends GameState {
 	
 	private TileMap tileMap;
 	private Background bg;
@@ -64,7 +67,7 @@ public class Level1State extends GameState {
 		teleport = new Teleport(tileMap);
 		// Khởi tạo Teleport với toạ độ mục tiêu và GameStateManager
 //		teleport.setPosition(3105, 183);  // vị trí của Teleport
-		 teleport.setPosition(3105, 183);  // vị trí của Teleport test
+		 teleport.setPosition(150, 196);  // vị trí của Teleport test
 		
 	}
 
@@ -79,8 +82,8 @@ public class Level1State extends GameState {
 	// next level
 	private void checkForWin() {
 		// Assuming the end of the level is at x = 2000 (for example)
-		if (player.getx() >= 3105) {
-//		if (player.getx() >= 150) {
+//		if (player.getx() >= 3105) {
+		if (player.getx() >= 150) {
 			// Transition to the next level
 			gsm.setState(GameStateManager.WINNERSTATE);
 		}

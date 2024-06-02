@@ -15,7 +15,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class WinnerState extends GameState {
+
+public class WinnerState implements GameState {
+    private GameStateManager gsm;
+// public class WinnerState extends GameState {
     private BufferedImage background;
 
 
@@ -29,12 +32,12 @@ public class WinnerState extends GameState {
     private Font font;
 
     public WinnerState(GameStateManager gsm) {
-        super.gsm = gsm;
-
+        // super.gsm = gsm;
+        this.gsm = gsm;
         init();
     }
 
-    @Override
+    // @Override
     public void init() {
         Game.stopMusic();
 
@@ -49,10 +52,10 @@ public class WinnerState extends GameState {
 
     }
 
-    @Override
+    // @Override
     public void update() {}
 
-    @Override
+    // @Override
     public void draw(Graphics2D g) {
         // Đảm bảo hình nền được vẽ trước tiên
         if (background != null) {
@@ -95,7 +98,7 @@ public class WinnerState extends GameState {
         }
     }
 
-    @Override
+    // @Override
     public void keyPressed(int k) {
         if (k == KeyEvent.VK_ENTER) {
             select();
@@ -115,6 +118,6 @@ public class WinnerState extends GameState {
     }
 
 
-    @Override
+    // @Override
     public void keyReleased(int k) {}
 }

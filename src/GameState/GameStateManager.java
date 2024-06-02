@@ -10,9 +10,15 @@ public class GameStateManager {
 	public static final int LEVEL1STATE = 1;
 	public static final int GAMEOVERSTATE = 2;
 	public static final int WINNERSTATE = 3;
+
 	// Additional constant for Level 2 state
 	public static final int LEVEL2STATE = 4;
-	public static final int NUMGAMESTATES = 5;
+	// Setting
+	public static final int SETTINGSTATE = 5;
+
+	// Help
+	public static final int HELPSTATE = 6;
+	public static final int NUMGAMESTATES = 7;
 
 
 	private GameState[] gameStates;
@@ -36,10 +42,23 @@ public class GameStateManager {
 			// Load Level2State when state is LEVEL2STATE
 		else if (state == LEVEL2STATE)
 			gameStates[state] = new Level2State(this);
+//		else if (state == SETTINGSTATE)
+//			gameStates[state] = new SettingState(this);
+		else if (state == HELPSTATE)
+			gameStates[state] = new HelpState(this);
 	}
 
 	private void unloadState(int state) {
 		gameStates[state] = null;
+	}
+
+	// public void setState(int state) {
+	//     currentState = state;
+	//     // Khởi tạo trạng thái mới
+	// }
+
+	public int getCurrentState() {
+		return currentState;
 	}
 
 	public void setState(int state) {

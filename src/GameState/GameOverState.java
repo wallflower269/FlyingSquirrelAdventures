@@ -15,11 +15,14 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class GameOverState extends GameState {
+public class GameOverState implements GameState {
+    private GameStateManager gsm;
+
+// public class GameOverState extends GameState {
     private BufferedImage background;
 
 
-    private String[] options = {"Resume",
+    private String[] options = {"Restart",
                                 "Menu"};
     private int currentChoice = 0;
 
@@ -28,12 +31,13 @@ public class GameOverState extends GameState {
     private Font font;
 
     public GameOverState(GameStateManager gsm) {
-        super.gsm = gsm;
+        // super.gsm = gsm;
+        this.gsm = gsm;
 
         init();
     }
 
-    @Override
+    // @Override
     public void init() {
         Game.stopMusic();
 
@@ -48,10 +52,10 @@ public class GameOverState extends GameState {
 
     }
 
-    @Override
+    // @Override
     public void update() {}
 
-    @Override
+    // @Override
     public void draw(Graphics2D g) {
         // Đảm bảo hình nền được vẽ trước tiên
         if (background != null) {
@@ -91,7 +95,7 @@ public class GameOverState extends GameState {
         }
     }
 
-    @Override
+    // @Override
     public void keyPressed(int k) {
         if (k == KeyEvent.VK_ENTER) {
             select();
@@ -111,6 +115,6 @@ public class GameOverState extends GameState {
     }
 
 
-    @Override
+    // @Override
     public void keyReleased(int k) {}
 }
