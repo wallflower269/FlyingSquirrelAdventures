@@ -34,7 +34,7 @@ public class HelpState implements GameState {
 
         try {
             // Đường dẫn tới hình nền, thay đổi nếu chạy từ môi trường khác nhau có thể cần chỉnh sửa
-            background = ImageIO.read(getClass().getResourceAsStream("/Image_icon/n3.png"));
+            background = ImageIO.read(getClass().getResourceAsStream("/Image_icon/HelpGuide.png"));
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error loading background image.");
@@ -61,7 +61,7 @@ public class HelpState implements GameState {
         // g.setFont(font);
 
         // Vẽ tùy chọn
-        g.setFont(new Font("Arial ", Font.BOLD, 11));
+        g.setFont(new Font("Press Start 2P ", Font.BOLD, 11));
         for (int i = 0; i < options.length; i++) {
             if (i == currentChoice) {
                 g.setColor(new Color(19, 19, 24, 215));
@@ -73,12 +73,12 @@ public class HelpState implements GameState {
     private void select() {
         String selectedOption = options[currentChoice];
         if (selectedOption.equals("Back")) {
-            gsm.setState(GameStateManager.MENUSTATE); // Thoát game
+            gsm.setState(GameStateManager.MENUSTATE);
         }
     }
 
     public void keyPressed(int k) {
-        if (k == KeyEvent.VK_BACK_SPACE) {
+        if (k == KeyEvent.VK_ENTER) {
             select();
         }
     }

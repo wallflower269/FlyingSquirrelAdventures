@@ -86,7 +86,7 @@ public class MenuState implements GameState {
             gsm.setState(GameStateManager.LEVEL1STATE);
         }
         if(currentChoice == 1) {
-            gsm.setState(GameStateManager.HELPSTATE);
+            gsm.setState(GameStateManager.HelpState);
         }
         if(currentChoice == 2) {
             System.exit(0);
@@ -110,7 +110,9 @@ public class MenuState implements GameState {
             }
         }
     }
-    public void keyReleased(int k) {}
+    public void keyReleased(int k) {
+
+    }
 
 }
 
