@@ -15,8 +15,10 @@ import javax.imageio.ImageIO;
 import Audio.AudioPlayer;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
+
 import java.io.IOException;
+
+import static GameState.GameSettings.*;
 
 
 public class SettingState implements GameState {
@@ -41,7 +43,7 @@ public class SettingState implements GameState {
         // super.gsm = gsm;
         this.gsm = gsm;
         init();
-        audioPlayer = new AudioPlayer("/Music/level1-1.mp3"); // Thay đổi đường dẫn tới file âm thanh của bạn
+
     }
 
     // @Override
@@ -76,7 +78,7 @@ public class SettingState implements GameState {
         // Draw Title
         g.setColor(new Color(246, 58, 15));
         g.setFont(new Font("Cambria", Font.BOLD,30));
-        g.drawString("Setting", 115, 60);
+        g.drawString("Music", 115, 60);
 
 
         // Draw options
@@ -96,14 +98,15 @@ public class SettingState implements GameState {
     private void select() {
         String selectedOption = options[currentChoice];
         if (selectedOption.equals("ON")) {
-            Game.playMusic(); // Phát âm thanh
+            setSoundOn(true);
+            Game.playMusic();
         } else if (selectedOption.equals("OFF")) {
-            Game.stopMusic(); // Tắt âm thanh
+            setSoundOn(false);
+            Game.stopMusic();
         } else if (selectedOption.equals("Quit")) {
             gsm.setState(GameStateManager.MENUSTATE);
         }
     }
-
     // @Override
     public void keyPressed(int k) {
         if (k == KeyEvent.VK_ENTER) {

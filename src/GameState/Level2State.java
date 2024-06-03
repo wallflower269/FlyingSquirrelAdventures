@@ -31,7 +31,12 @@ public class Level2State implements GameState {
     }
 
     public void init() {
-        Game.playMusic();
+        if (GameSettings.isSoundOn()) {
+            Game.playMusic();
+        } else if (GameSettings.isSoundOff()) {
+            Game.stopMusic();}
+//        }else {
+//            Game.playMusic();}
         tileMap = new TileMap(30);
         tileMap.loadTiles("/Tilesets/grasstileset.gif");
         tileMap.loadMap("/Maps/level2-2.map");
@@ -64,13 +69,13 @@ public class Level2State implements GameState {
     private void checkPlayerStatus() {
         if (player.dead()) {
             gsm.setState(GameStateManager.GAMEOVERSTATE);
-            Game.stopMusic();
+
         }
     }
 
     private void checkForWin() {
         if (player.getx() >= 3127) {
-//        if (player.getx() >= 143) {
+       // if (player.getx() >= 143) {
             gsm.setState(GameStateManager.WINNERSTATE);
         }
     }

@@ -34,7 +34,7 @@ public class HelpState implements GameState {
 
         try {
             // Đường dẫn tới hình nền, thay đổi nếu chạy từ môi trường khác nhau có thể cần chỉnh sửa
-            background = ImageIO.read(getClass().getResourceAsStream("/Image_icon/HelpGuide.png"));
+            background = ImageIO.read(getClass().getResourceAsStream("/Image_icon/n3.png"));
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error loading background image.");
@@ -78,7 +78,7 @@ public class HelpState implements GameState {
     }
 
     public void keyPressed(int k) {
-        if (k == KeyEvent.VK_BACK_SPACE) {
+        if (k == KeyEvent.VK_ENTER) {
             select();
         }
     }

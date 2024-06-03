@@ -1,6 +1,8 @@
 // Audio/AudioPlayer.java
 package Audio;
 
+import GameState.ControlCenter;
+
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
@@ -24,10 +26,12 @@ public class AudioPlayer {
 	}
 
 	public void play() {
-		if (clip == null) return;
-		stop();
-		clip.setFramePosition(0);
-		clip.start();
+		if (ControlCenter.isAudioOn) {
+			if (clip == null) return;
+			stop();
+			clip.setFramePosition(0);
+			clip.start();
+		}
 	}
 
 	public void stop() {

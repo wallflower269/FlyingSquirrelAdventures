@@ -8,7 +8,7 @@ import java.awt.event.KeyEvent;
 
 public class MenuState implements GameState {
     private GameStateManager gsm;
-// public class MenuState extends GameState {
+
 
     private Background bg;
 
@@ -16,7 +16,7 @@ public class MenuState implements GameState {
     private String[] options = {
             "Start",
             "Help",
-            "Setting",
+            "Music",
             "Quit"
     };
 
@@ -26,6 +26,10 @@ public class MenuState implements GameState {
     private Font font;
 
     public MenuState(GameStateManager gsm) {
+        if (GameSettings.isSoundOn()) {
+            Game.playMusic();
+        } else if (GameSettings.isSoundOff()) {
+            Game.stopMusic();}
 
         this.gsm = gsm;
 

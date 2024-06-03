@@ -2,6 +2,8 @@
 package Main;
 
 import Audio.AudioPlayer;
+import GameState.ControlCenter;
+import GameState.GameSettings;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -9,6 +11,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+
+import static Audio.AudioPlayer.*;
 
 public class Game {
 	private static AudioPlayer bgMusic;
@@ -37,7 +41,13 @@ public class Game {
 		window.setVisible(true);
 
 		// Initialize background music
-		bgMusic = new AudioPlayer("Resources\\Music\\the_field_of_dreams.wav");
+		bgMusic = new AudioPlayer("Resources\\Music\\a-little-quirky-167769.wav");
+		if (GameSettings.isSoundOn()) {
+			playMusic();
+		} else {
+			stopMusic();
+		}
+
 	}
 
 	public static void stopMusic() {

@@ -144,10 +144,11 @@ public abstract class Player extends MapObject {
 		animation.setDelay(400);
 		
 		sfx = new HashMap<String, AudioPlayer>();
-		sfx.put("jump", new AudioPlayer("/SFX/jump.mp3"));
-		sfx.put("scratch", new AudioPlayer("/SFX/scratch.mp3"));
+		sfx.put("jump", new AudioPlayer("Resources\\SFX\\cartoon-jump-6462.wav"));
+		sfx.put("scratch", new AudioPlayer("Resources\\SFX\\sword-hit-7160.wav"));
 		
 	}
+
 
 	// thêm code:
 

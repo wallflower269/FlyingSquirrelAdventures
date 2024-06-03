@@ -26,7 +26,7 @@ public class Level1State implements GameState {
 	
 	private HUD hud;
 	
-	private AudioPlayer bgMusic;
+
 
 	private Teleport teleport;  // local variable
 	
@@ -36,7 +36,14 @@ public class Level1State implements GameState {
 	}
 	
 	public void init() {
-		Game.playMusic();
+			if (GameSettings.isSoundOn()) {
+				Game.playMusic();
+			} else if (GameSettings.isSoundOff()) {
+				Game.stopMusic();}
+//			}else {
+//				Game.playMusic();}
+
+
 		
 		tileMap = new TileMap(30);
 		tileMap.loadTiles("/Tilesets/grasstileset.gif");
@@ -59,15 +66,12 @@ public class Level1State implements GameState {
 		explosions = new ArrayList<Explosion>();
 		
 		hud = new HUD(player);
-		
-		bgMusic = new AudioPlayer("/Music/level1-1.mp3");
-		// bgMusic.play();
 
 		// Initialize and set the position of the teleport
 		teleport = new Teleport(tileMap);
 		// Khởi tạo Teleport với toạ độ mục tiêu và GameStateManager
-//		teleport.setPosition(3105, 183);  // vị trí của Teleport
-		 teleport.setPosition(150, 196);  // vị trí của Teleport test
+		teleport.setPosition(3105, 183);  // vị trí của Teleport
+	//	 teleport.setPosition(150, 196);  // vị trí của Teleport test
 		
 	}
 
@@ -75,15 +79,15 @@ public class Level1State implements GameState {
 	private void checkPlayerStatus() {
 		if (player.dead() == true) {  // Giả sử isDead() kiểm tra nếu trạng thái dead là true
 			gsm.setState(GameStateManager.GAMEOVERSTATE);
-			Game.stopMusic();
+
 		}
 	}
 
 	// next level
 	private void checkForWin() {
 		// Assuming the end of the level is at x = 2000 (for example)
-//		if (player.getx() >= 3105) {
-		if (player.getx() >= 150) {
+		if (player.getx() >= 3105) {
+		//if (player.getx() >= 150) {
 			// Transition to the next level
 			gsm.setState(GameStateManager.WINNERSTATE);
 		}
