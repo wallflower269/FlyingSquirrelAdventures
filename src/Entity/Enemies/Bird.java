@@ -7,10 +7,10 @@ import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
 
 import javax.imageio.ImageIO;
-public class Sparrow extends Enemy {
+public class Bird extends Enemy {
     private BufferedImage[] sprites;
 
-    public Sparrow(TileMap tm) {
+    public Bird(TileMap tm) {
 
         super(tm);
 

@@ -5,7 +5,6 @@ import Main.GamePanel;
 import TileMap.*;
 import Entity.*;
 import Entity.Enemies.*;
-import Audio.AudioPlayer;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -142,7 +141,7 @@ public class Level1State implements GameState {
 			enemies.add(a);
 		}
 
-		Sparrow sp;
+		Bird bi;
 		Point[] point4 = new Point[] {
 //				new Point(100, 50),
 				new Point(860, 155),
@@ -150,9 +149,9 @@ public class Level1State implements GameState {
 				new Point(2500, 70)
 		};
 		for(int i = 0; i < point4.length; i++) {
-			sp = new Sparrow(tileMap);
-			sp.setPosition(point4[i].x, point4[i].y);
-			enemies.add(sp);
+			bi = new Bird(tileMap);
+			bi.setPosition(point4[i].x, point4[i].y);
+			enemies.add(bi);
 		}
 	}
 

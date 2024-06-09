@@ -8,7 +8,7 @@
       <sourceFolder url="file://$MODULE_DIR$/Libs" type="java-resource" />
     </content>
     <content url="file://$MODULE_DIR$/out" />
-    <orderEntry type="jdk" jdkName="21" jdkType="JavaSDK" />
+    <orderEntry type="jdk" jdkName="corretto-21" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
