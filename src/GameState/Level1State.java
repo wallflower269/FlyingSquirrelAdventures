@@ -14,26 +14,27 @@ import java.util.ArrayList;
 public class Level1State implements GameState {
     private GameStateManager gsm;
 // public class Level1State extends GameState {
-	
+
 	private TileMap tileMap;
 	private Background bg;
-	
+
 	private Player player;
-	
+
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Explosion> explosions;
-	
+
 	private HUD hud;
-	
+
 
 
 	private Teleport teleport;  // local variable
-	
+
 	public Level1State(GameStateManager gsm) {
 		this.gsm = gsm;
+		gsm.setLastLevelState(GameStateManager.LEVEL1STATE); // Set the current level
 		init();
 	}
-	
+
 	public void init() {
 			if (GameSettings.isSoundOn()) {
 				Game.playMusic();
@@ -43,13 +44,13 @@ public class Level1State implements GameState {
 //				Game.playMusic();}
 
 
-		
+
 		tileMap = new TileMap(30);
 		tileMap.loadTiles("/Tilesets/grasstileset.gif");
 		tileMap.loadMap("/Maps/level1-1.map");
 		tileMap.setPosition(0, 0);
 		tileMap.setTween(1);
-		
+
 		bg = new Background("/Backgrounds/m2.jpg", 0.1);
 
 		player = new Player(tileMap , gsm) {
@@ -59,11 +60,11 @@ public class Level1State implements GameState {
 			}
 		};
 		player.setPosition(100, 100);
-		
+
 		populateEnemies();
-		
+
 		explosions = new ArrayList<Explosion>();
-		
+
 		hud = new HUD(player);
 
 		// Initialize and set the position of the teleport
@@ -71,7 +72,7 @@ public class Level1State implements GameState {
 		// Khởi tạo Teleport với toạ độ mục tiêu và GameStateManager
 		teleport.setPosition(3105, 183);  // vị trí của Teleport
 	//	 teleport.setPosition(150, 196);  // vị trí của Teleport test
-		
+
 	}
 
 	// check chuyển trạng thái
@@ -86,7 +87,7 @@ public class Level1State implements GameState {
 	private void checkForWin() {
 		// Assuming the end of the level is at x = 2000 (for example)
 		if (player.getx() >= 3105) {
-		//if (player.getx() >= 150) {
+//		if (player.getx() >= 150) {
 			// Transition to the next level
 			gsm.setState(GameStateManager.WINNERSTATE);
 		}
@@ -94,7 +95,7 @@ public class Level1State implements GameState {
 
 
 	private void populateEnemies() {
-		
+
 		enemies = new ArrayList<Enemy>();
 
 		Dog d;
@@ -158,7 +159,7 @@ public class Level1State implements GameState {
 	public void update() {
 		// Update player
 		player.update();
-		
+
 		// update teleport
 		teleport.update();
 
@@ -212,30 +213,30 @@ public class Level1State implements GameState {
 		checkForWin();
 	}
 
-	
+
 	public void draw(Graphics2D g) {
-		
+
 		// draw bg
 		bg.draw(g);
-		
+
 		// draw tilemap
 		tileMap.draw(g);
-		
+
 		// draw player
 		player.draw(g);
-		
+
 		// draw enemies
 		for(int i = 0; i < enemies.size(); i++) {
 			enemies.get(i).draw(g);
 		}
-		
+
 		// draw explosions
 		for(int i = 0; i < explosions.size(); i++) {
 			explosions.get(i).setMapPosition(
 				(int)tileMap.getx(), (int)tileMap.gety());
 			explosions.get(i).draw(g);
 		}
-		
+
 
 		// Teleport
 		if (teleport != null) {
@@ -245,9 +246,9 @@ public class Level1State implements GameState {
 
 		// draw hud
 		hud.draw(g);
-		
+
 	}
-	
+
 	public void keyPressed(int k) {
 		if(k == KeyEvent.VK_LEFT) player.setLeft(true);
 		if(k == KeyEvent.VK_RIGHT) player.setRight(true);
@@ -258,7 +259,7 @@ public class Level1State implements GameState {
 		if(k == KeyEvent.VK_R) player.setScratching();
 		if(k == KeyEvent.VK_F) player.setFiring();
 	}
-	
+
 	public void keyReleased(int k) {
 		if(k == KeyEvent.VK_LEFT) player.setLeft(false);
 		if(k == KeyEvent.VK_RIGHT) player.setRight(false);

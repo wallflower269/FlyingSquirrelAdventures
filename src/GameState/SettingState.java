@@ -78,7 +78,7 @@ public class SettingState implements GameState {
         // Draw Title
         g.setColor(new Color(246, 58, 15));
         g.setFont(new Font("Cambria", Font.BOLD,30));
-        g.drawString("Music", 115, 60);
+        g.drawString("Music", 120, 60);
 
 
         // Draw options
@@ -89,7 +89,7 @@ public class SettingState implements GameState {
             } else {
                 g.setColor(new Color(8, 14, 16));
             }
-            g.drawString(options[i], 120, 143 + i * 15);
+            g.drawString(options[i], 145, 143 + i * 15);
             // g.drawString(options[i], 145, 140 + i * 15);
         }
     }

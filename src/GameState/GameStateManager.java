@@ -17,16 +17,18 @@ public class GameStateManager {
 	private GameState[] gameStates;
 	private int currentState;
 	private Stack<Integer> stateHistory;
+	private int lastLevelState;
 
 	public GameStateManager() {
 		gameStates = new GameState[NUMGAMESTATES];
 		stateHistory = new Stack<>();
 		currentState = MENUSTATE;
+		lastLevelState = LEVEL1STATE; // Default to Level 1 initially
 		loadState(currentState);
 	}
 
 	private void loadState(int state) {
-	//	System.out.println("Loading state: " + state);
+		//	System.out.println("Loading state: " + state);
 		try {
 			if (state == MENUSTATE) {
 				gameStates[state] = new MenuState(this);
@@ -41,7 +43,7 @@ public class GameStateManager {
 			} else if (state == HEPSTATE) {
 				gameStates[state] = new HelpState(this);
 			}  else if (state == SETTINGSTATE) {
-			gameStates[state] = new SettingState(this);
+				gameStates[state] = new SettingState(this);
 			}
 			if (gameStates[state] != null) {
 				System.out.println("Initializing state: " + state);
@@ -56,18 +58,27 @@ public class GameStateManager {
 	}
 
 	private void unloadState(int state) {
-	//	System.out.println("Unloading state: " + state);
+		//	System.out.println("Unloading state: " + state);
 		gameStates[state] = null;
 	}
 
 	public void setState(int state) {
-	//	System.out.println("Unloading current state: " + currentState);
+		//	System.out.println("Unloading current state: " + currentState);
 		unloadState(currentState);
 		stateHistory.push(currentState); // Lưu trạng thái hiện tại vào stack trước khi chuyển trạng thái
 		currentState = state;
-	//	System.out.println("Loading new state: " + currentState);
+		//	System.out.println("Loading new state: " + currentState);
 		loadState(currentState);
-	//	System.out.println("State changed to: " + currentState);
+		//	System.out.println("State changed to: " + currentState);
+	}
+
+	public void setLastLevelState(int state) {
+		if (state == LEVEL1STATE || state == LEVEL2STATE) {
+			lastLevelState = state;
+		}
+	}
+	public int getLastLevelState() {
+		return lastLevelState;
 	}
 
 	public void update() {

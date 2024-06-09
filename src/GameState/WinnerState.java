@@ -42,7 +42,7 @@ public class WinnerState implements GameState { // Thay đổi để triển kha
         }
 
         g.setColor(new Color(246, 58, 15));
-        g.setFont(new Font("Century Gothic", Font.BOLD, 30));
+        g.setFont(new Font("Cambria", Font.BOLD, 30));
         g.drawString("Winner", 115, 60);
 
         g.setFont(new Font("Arial", Font.BOLD, 14));
@@ -52,7 +52,7 @@ public class WinnerState implements GameState { // Thay đổi để triển kha
             } else {
                 g.setColor(new Color(8, 14, 16));
             }
-            g.drawString(options[i], 120, 143 + i * 15);
+            g.drawString(options[i], 130, 143 + i * 15);
         }
     }
 

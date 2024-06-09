@@ -18,12 +18,12 @@ import java.io.IOException;
 public class GameOverState implements GameState {
     private GameStateManager gsm;
 
-// public class GameOverState extends GameState {
+    // public class GameOverState extends GameState {
     private BufferedImage background;
 
 
     private String[] options = {"Restart",
-                                "Menu"};
+            "Menu"};
     private int currentChoice = 0;
 
     private Color titleColor;
@@ -68,8 +68,8 @@ public class GameOverState implements GameState {
 
         // Draw Title
         g.setColor(new Color(246, 58, 15));
-        g.setFont(new Font("Century Gothic", Font.BOLD,30));
-        g.drawString("Game Over", 65, 60);
+        g.setFont(new Font("Cambria", Font.BOLD,30));
+        g.drawString("Game Over", 80, 60);
 
 
         // Draw options
@@ -80,15 +80,18 @@ public class GameOverState implements GameState {
             } else {
                 g.setColor(new Color(8, 14, 16));
             }
-            g.drawString(options[i], 125, 143 + i * 15);
+            g.drawString(options[i], 135, 143 + i * 15);
             // g.drawString(options[i], 145, 140 + i * 15);
         }
     }
 
 
     private void select() {
+//        if (currentChoice == 0) {
+//            gsm.setState(GameStateManager.LEVEL1STATE); // Resume
+//        }
         if (currentChoice == 0) {
-            gsm.setState(GameStateManager.LEVEL1STATE); // Resume
+            gsm.setState(gsm.getLastLevelState());
         }
         if (currentChoice == 1) {
             gsm.setState(GameStateManager.MENUSTATE); // Return to Menu

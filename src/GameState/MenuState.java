@@ -40,7 +40,7 @@ public class MenuState implements GameState {
 
             titleColor = new Color(241, 58, 17);
             titleFont = new Font(
-                    "Century Gothic",
+                    "Cambria",
                     Font.BOLD,
                     30);
 

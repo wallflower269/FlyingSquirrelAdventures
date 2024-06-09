@@ -27,6 +27,7 @@ public class Level2State implements GameState {
 
     public Level2State(GameStateManager gsm) {
         this.gsm = gsm;
+        gsm.setLastLevelState(GameStateManager.LEVEL2STATE); // Set the current level
         init();
     }
 
@@ -75,7 +76,7 @@ public class Level2State implements GameState {
 
     private void checkForWin() {
         if (player.getx() >= 3127) {
-       // if (player.getx() >= 143) {
+//        if (player.getx() >= 143) {    // index to test
             gsm.setState(GameStateManager.WINNERSTATE);
         }
     }
