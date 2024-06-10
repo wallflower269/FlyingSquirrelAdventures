@@ -71,7 +71,7 @@ public class Level1State implements GameState {
 		teleport = new Teleport(tileMap);
 		// Khởi tạo Teleport với toạ độ mục tiêu và GameStateManager
 		teleport.setPosition(3105, 183);  // vị trí của Teleport
-	//	 teleport.setPosition(150, 196);  // vị trí của Teleport test
+//		 teleport.setPosition(150, 196);  // vị trí của Teleport test
 
 	}
 
