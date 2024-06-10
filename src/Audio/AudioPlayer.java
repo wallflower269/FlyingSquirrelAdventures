@@ -1,14 +1,21 @@
-// Audio/AudioPlayer.java
 package Audio;
-
-import GameState.ControlCenter;
-
 import javax.sound.sampled.*;
 import java.io.File;
-import java.io.IOException;
-
 public class AudioPlayer {
+	private static boolean soundOn = true;
+	private static boolean soundOff = false;
 
+	public static boolean isSoundOn() {
+		return soundOn;
+	}
+	public static boolean isSoundOff() {
+		return soundOff;
+	}
+
+
+	public static void setSoundOn(boolean soundOn) {
+		AudioPlayer.soundOn = soundOn;
+	}
 	private Clip clip;
 
 	public AudioPlayer(String s) {
@@ -26,7 +33,7 @@ public class AudioPlayer {
 	}
 
 	public void play() {
-		if (ControlCenter.isAudioOn) {
+		if (AudioPlayer.isSoundOn()) {
 			if (clip == null) return;
 			stop();
 			clip.setFramePosition(0);
@@ -36,11 +43,6 @@ public class AudioPlayer {
 
 	public void stop() {
 		if (clip.isRunning()) clip.stop();
-	}
-
-	public void close() {
-		stop();
-		clip.close();
 	}
 
 	public void loop() {

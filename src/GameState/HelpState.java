@@ -16,51 +16,34 @@ public class HelpState implements GameState {
 
     private BufferedImage background;
 
-    private Font font; // Font cho đoạn văn bản
-    private Color textColor; // Màu sắc cho đoạn văn bản
-
-    // private String[] options = {"Back","0"};
     private String[] options = {"Back"};
     private int currentChoice = 0;
 
     public HelpState(GameStateManager gsm) {
-        // Khởi tạo đoạn văn bản và các thuộc tính liên quan
         this.gsm = gsm;
         init();
     }
 
     public void init() {
-        // Game.playMusic();
 
         try {
-            // Đường dẫn tới hình nền, thay đổi nếu chạy từ môi trường khác nhau có thể cần chỉnh sửa
             background = ImageIO.read(getClass().getResourceAsStream("/Image_icon/n3.png"));
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error loading background image.");
         }
-
-        // font = new Font("Arial", Font.BOLD | Font.ITALIC, 18); // Font in đậm và nghiêng
-        // textColor = Color.WHITE;
     }
 
     public void update() {
-        // Cập nhật trạng thái, nếu cần
     }
 
     public void draw(Graphics2D g) {
-        // Đảm bảo hình nền được vẽ trước tiên
         if (background != null) {
             g.drawImage(background, 0, 0, GamePanel.WIDTH, GamePanel.HEIGHT, null);
         } else {
             g.setColor(Color.BLACK);
             g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
         }
-
-        // Vẽ đoạn văn bản vào cửa sổ help với hiệu ứng đổ bóng
-        // g.setFont(font);
-
-        // Vẽ tùy chọn
         g.setFont(new Font("Press Start 2P ", Font.BOLD, 11));
         for (int i = 0; i < options.length; i++) {
             if (i == currentChoice) {
@@ -84,7 +67,6 @@ public class HelpState implements GameState {
     }
 
     public void keyReleased(int k) {
-        // Xử lý sự kiện khi có phím được thả ra, có thể không cần thiết
 
     }
 }

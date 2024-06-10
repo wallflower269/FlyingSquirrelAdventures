@@ -14,11 +14,6 @@ public class HUD {
 		player = p;
 		try {
 			image = ImageIO.read(getClass().getResourceAsStream("/HUD/hud.gif"));
-			if (image == null) {
-				System.out.println("HUD image not found!");
-			} else {
-				System.out.println("HUD image loaded successfully.");
-			}
 			font = new Font("Arial", Font.PLAIN, 14);
 		} catch (Exception e) {
 			e.printStackTrace();

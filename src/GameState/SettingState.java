@@ -1,9 +1,5 @@
 package GameState;
-
-import java.awt.*;
 import java.awt.event.KeyEvent;
-
-import Main.GamePanel;
 import Main.Game;
 
 import java.awt.Color;
@@ -18,12 +14,11 @@ import java.awt.image.BufferedImage;
 
 import java.io.IOException;
 
-import static GameState.GameSettings.*;
+import static Audio.AudioPlayer.setSoundOn;
 
 
 public class SettingState implements GameState {
     private GameStateManager gsm;
-    // public class WinnerState extends GameState {
     private BufferedImage background;
 
 
@@ -40,7 +35,6 @@ public class SettingState implements GameState {
     private AudioPlayer audioPlayer;
 
     public SettingState(GameStateManager gsm) {
-        // super.gsm = gsm;
         this.gsm = gsm;
         init();
 
@@ -51,22 +45,16 @@ public class SettingState implements GameState {
         Game.playMusic();
 
         try {
-            // Đường dẫn tới hình nền, thay đổi nếu chạy từ môi trường khác nhau có thể cần chỉnh sửa
             background = ImageIO.read(
                     getClass().getResourceAsStream("/Backgrounds/m1.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Error loading background image.");
         }
 
     }
 
-    // @Override
     public void update() {}
-
-    // @Override
     public void draw(Graphics2D g) {
-        // Đảm bảo hình nền được vẽ trước tiên
         if (background != null) {
             g.drawImage(background, 0, 0, null);
         } else {
@@ -90,7 +78,6 @@ public class SettingState implements GameState {
                 g.setColor(new Color(8, 14, 16));
             }
             g.drawString(options[i], 145, 143 + i * 15);
-            // g.drawString(options[i], 145, 140 + i * 15);
         }
     }
 

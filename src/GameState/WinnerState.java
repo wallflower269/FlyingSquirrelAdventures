@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class WinnerState implements GameState { // Thay đổi để triển khai GameState interface
+public class WinnerState implements GameState {
     private GameStateManager gsm;
     private BufferedImage background;
     private String[] options = {"Restart", "Next Level", "Menu"};
@@ -57,31 +57,25 @@ public class WinnerState implements GameState { // Thay đổi để triển kha
     }
 
     private void select() {
-       // System.out.println("Select option: " + currentChoice);
-        int currentState = gsm.getCurrentState();
-        int previousState = gsm.getPreviousState(); // Lấy trạng thái trước đó
-       // System.out.println("Current state before transition: " + currentState);
-       // System.out.println("Previous state: " + previousState);
+        int previousState = gsm.getPreviousState();
+
 
         if (currentChoice == 0) {
-          //  System.out.println("Transitioning to LEVEL1STATE");
-            gsm.setState(GameStateManager.LEVEL1STATE); // Restart
+
+            gsm.setState(GameStateManager.LEVEL1STATE);
         } else if (currentChoice == 1) {
             if (previousState == GameStateManager.LEVEL1STATE) {
-           //     System.out.println("Transitioning to LEVEL2STATE");
-                gsm.setState(GameStateManager.LEVEL2STATE); // Next Level
+
+                gsm.setState(GameStateManager.LEVEL2STATE);
             } else if (previousState == GameStateManager.LEVEL2STATE) {
-              //  System.out.println("Transitioning to MENUSTATE");
-                gsm.setState(GameStateManager.MENUSTATE); // Return to Menu
-            } else {
-                System.out.println("No valid previous state found, staying in current state");
+
+                gsm.setState(GameStateManager.MENUSTATE);
             }
         } else if (currentChoice == 2) {
-            System.out.println("Transitioning to MENUSTATE");
-           // gsm.setState(GameStateManager.MENUSTATE); // Return to Menu
+            gsm.setState(GameStateManager.MENUSTATE);
+
         }
 
-       // System.out.println("Current State after select: " + gsm.getCurrentState());
     }
 
     @Override

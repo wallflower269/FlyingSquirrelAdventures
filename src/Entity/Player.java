@@ -1,22 +1,16 @@
 package Entity;
-
-import GameState.ControlCenter;
 import GameState.GameStateManager;
-import GameState.MenuState;
 import TileMap.*;
 import Audio.AudioPlayer;
 
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
 public abstract class Player extends MapObject {
 	private GameStateManager gsm;
-	
-	// player stuff
 	private int health;
 	private int maxHealth;
 	private int fire;
@@ -53,14 +47,8 @@ public abstract class Player extends MapObject {
 	private static final int JUMPING = 3;
 	private static final int FALLING = 3;
 	private static final int GLIDING = 4;
-
-	private static final int FLYING = 6;
-
-	private static final int DASHING = 7;
 	private static final int FIREBALL = 9;
 	private static final int DEAD = 10;
-
-	private static final int TELEPORTING = 11;
 	private HashMap<String, AudioPlayer> sfx;
 	
 	public Player(TileMap tm , GameStateManager gsm) {
@@ -149,20 +137,6 @@ public abstract class Player extends MapObject {
 		
 	}
 
-
-	// thêm code:
-
-	public boolean intersectsTeleport(Teleport teleport) {
-		return this.intersects(teleport);
-	}
-
-	public boolean isAtPosition(int targetX, int targetY) {
-		return (int)x == targetX && (int)y == targetY;
-	}
-	
-	//
-
-	
 	public int getHealth() { return health; }
 	public int getMaxHealth() { return maxHealth; }
 	public int getFire() { return fire; }
@@ -226,14 +200,9 @@ public abstract class Player extends MapObject {
 		}
 		
 	}
-
-
 	public void hit(int damage) {
-		//if(flinching) return;
-		//health -= damage;
 		if (flinching) return;
 		health -= damage;
-		System.out.println("Damaged: " + damage + ", New Health: " + health);
 
 		if(health <= 0) {
 			health = 0;
@@ -273,8 +242,7 @@ public abstract class Player extends MapObject {
 				}
 			}
 		}
-		
-		// cannot move while attacking, except in air
+
 		if(
 		(currentAction == SCRATCHING || currentAction == FIREBALL) &&
 		!(jumping || falling)) {
@@ -308,9 +276,7 @@ public abstract class Player extends MapObject {
 		getNextPosition();
 		checkTileMapCollision();
 		setPosition(xtemp, ytemp);
-//		System.out.println("Player at X: "+x);
-//		System.out.println("Player at Y: "+y);
-		//System.out.println("Player Y Position: "  +x) ;
+
 
 
 		if (y > 200) {
@@ -319,7 +285,6 @@ public abstract class Player extends MapObject {
 		}
 
 		if (dead) {
-			System.out.println("Player is dead, changing to Game Over State."); // Xác nhận chuyển trạng thái
 			gsm.setState(GameStateManager.GAMEOVERSTATE);
 		}
 		

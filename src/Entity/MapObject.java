@@ -43,7 +43,6 @@ public abstract class MapObject {
 	// animation
 	protected Animation animation;
 	protected int currentAction;
-	protected int previousAction;
 	protected boolean facingRight;
 	
 	// movement
@@ -167,16 +166,11 @@ public abstract class MapObject {
 	public int gety() { return (int)y; }
 	public int getWidth() { return width; }
 	public int getHeight() { return height; }
-	public int getCWidth() { return cwidth; }
-	public int getCHeight() { return cheight; }
+
 	
 	public void setPosition(double x, double y) {
 		this.x = x;
 		this.y = y;
-	}
-	public void setVector(double dx, double dy) {
-		this.dx = dx;
-		this.dy = dy;
 	}
 	
 	public void setMapPosition() {

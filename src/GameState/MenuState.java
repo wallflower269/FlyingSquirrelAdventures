@@ -1,5 +1,6 @@
 package GameState;
 
+import Audio.AudioPlayer;
 import Main.Game;
 import TileMap.Background;
 
@@ -26,9 +27,9 @@ public class MenuState implements GameState {
     private Font font;
 
     public MenuState(GameStateManager gsm) {
-        if (GameSettings.isSoundOn()) {
+        if (AudioPlayer.isSoundOn()) {
             Game.playMusic();
-        } else if (GameSettings.isSoundOff()) {
+        } else if (AudioPlayer.isSoundOff()) {
             Game.stopMusic();}
 
         this.gsm = gsm;

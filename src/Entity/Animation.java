@@ -24,7 +24,7 @@ public class Animation {
 	}
 	
 	public void setDelay(long d) { delay = d; }
-	public void setFrame(int i) { currentFrame = i; }
+
 	
 	public void update() {
 		
@@ -41,8 +41,7 @@ public class Animation {
 		}
 		
 	}
-	
-	public int getFrame() { return currentFrame; }
+
 	public BufferedImage getImage() { return frames[currentFrame]; }
 	public boolean hasPlayedOnce() { return playedOnce; }
 	

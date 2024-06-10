@@ -14,7 +14,8 @@ import java.util.ArrayList;
 
 public class Level2State implements GameState {
     private GameStateManager gsm;
-// public class Level2State extends GameState {
+
+
 
     private TileMap tileMap;
     private Background bg;
@@ -27,17 +28,15 @@ public class Level2State implements GameState {
 
     public Level2State(GameStateManager gsm) {
         this.gsm = gsm;
-        gsm.setLastLevelState(GameStateManager.LEVEL2STATE); // Set the current level
+
         init();
     }
 
     public void init() {
-        if (GameSettings.isSoundOn()) {
+        if (AudioPlayer.isSoundOn()) {
             Game.playMusic();
-        } else if (GameSettings.isSoundOff()) {
+        } else if (AudioPlayer.isSoundOff()) {
             Game.stopMusic();}
-//        }else {
-//            Game.playMusic();}
         tileMap = new TileMap(30);
         tileMap.loadTiles("/Tilesets/grasstileset.gif");
         tileMap.loadMap("/Maps/level2-2.map");
@@ -59,11 +58,8 @@ public class Level2State implements GameState {
         explosions = new ArrayList<Explosion>();
 
         hud = new HUD(player);
-
-        // Initialize and set the position of the teleport
         teleport = new Teleport(tileMap);
             teleport.setPosition(3127, 150);
-  //       teleport.setPosition(142, 150);  // vị trí của Teleport  test
 
     }
 

@@ -1,7 +1,6 @@
 package Entity;
 
 import TileMap.TileMap;
-import Entity.MapObject;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -12,7 +11,6 @@ import javax.imageio.stream.ImageInputStream;
 import javax.imageio.ImageReader;
 import java.util.ArrayList;
 import java.util.Iterator;
-import javax.imageio.ImageReadParam;
 
 public class Teleport extends MapObject {
 
@@ -24,11 +22,8 @@ public class Teleport extends MapObject {
         width = height = 40;
         cwidth = 20;
         cheight = 40;
-        
-
-        // Load sprites
         try {
-            File gifFile = new File("Resources/Sprites/tele.gif"); // Đường dẫn tương đối
+            File gifFile = new File("Resources/Sprites/tele.gif");
             sprites = loadGIF(gifFile);
 
             animation = new Animation();
@@ -43,7 +38,6 @@ public class Teleport extends MapObject {
 
     public void update() {
         animation.update();
-        // Thêm bất kỳ logic cập nhật nào khác liên quan đến teleport ở đây
     }
 
     public void draw(Graphics2D g) {
@@ -86,15 +80,8 @@ public class Teleport extends MapObject {
         return frames;
     }
 
-    public boolean intersects(Player player) {
-        Rectangle r1 = getRectangle();
-        Rectangle r2 = player.getRectangle();
-        return r1.intersects(r2);
-    }
-
     @Override
     public boolean dead() {
-        // implementation of the dead() method goes here
         return false;
     }
 }
