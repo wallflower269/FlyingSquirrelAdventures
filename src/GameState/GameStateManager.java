@@ -95,9 +95,7 @@ public class GameStateManager {
 		}
 	}
 
-	public int getCurrentState() {
-		return currentState;
-	}
+
 
 	public int getPreviousState() {
 		if (stateHistory.size() < 2) {
